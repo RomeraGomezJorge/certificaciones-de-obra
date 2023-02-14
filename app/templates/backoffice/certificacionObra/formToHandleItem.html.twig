@@ -1,0 +1,437 @@
+{% extends 'backoffice/_shared/formToHandleItem.base.html.twig' %}
+{% block form %}
+    <form action="{{ path(form_action_attribute) }}" method="post" id="form"
+          novalidate="novalidate">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <input type="hidden" name="id" value="{{ id }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token(id) }}">
+                    <div class="form-group {{ flash.has('errors.nombres')? 'has-error':'' }}">
+                        <label>Nombres</label>
+                        <input type="text"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="nombres"
+                               value="{{ nombres }}"
+                               maxlength="100"
+                               class="form-control"
+                               autofocus
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.nombres') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.apellido')? 'has-error':'' }}">
+                        <label>Apellido</label>
+                        <input type="text"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="apellido"
+                               value="{{ apellido }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.apellido') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.numeroObra')? 'has-error':'' }}">
+                        <label>Número</label>
+                        <input type="number"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="numeroObra"
+                               value="{{ numeroObra }}"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.numeroObra') }} </span>
+                        </small>
+                    </div>
+                    <div class="form-group {{ flash.has('errors.etapa')? 'has-error':'' }}">
+                        <label>Etapa</label>
+                        <input type="text"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="etapa"
+                               value="{{ etapa }}"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.etapa') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.permiteModificarComputo')? 'has-error':'' }}">
+                        <label>Permite modificar computo</label>
+                        <input type="text"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="permiteModificarComputo"
+                               value="{{ permiteModificarComputo }}"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.permiteModificarComputo') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.insGrabaCert')? 'has-error':'' }}">
+                        <label>Ins. Graba. Cert.</label>
+                        <input type="text"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="insGrabaCert"
+                               value="{{ insGrabaCert }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.insGrabaCert') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.programa')? 'has-error':'' }}">
+                        <label>Programa</label>
+                        <input type="text"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="programa"
+                               value="{{ programa }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.programa') }} </span>
+                        </small>
+                    </div>
+                    <div class="form-group {{ flash.has('errors.departamento')? 'has-error':'' }}">
+                        <label>Departamento</label>
+                        <input type="text"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="departamento"
+                               value="{{ departamento }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.departamento') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.localidad')? 'has-error':'' }}">
+                        <label>Localidad</label>
+                        <input type="text"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="localidad"
+                               value="{{ localidad }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.localidad') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.codigoPostal')? 'has-error':'' }}">
+                        <label>Codigo postal</label>
+                        <input type="text"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="codigoPostal"
+                               value="{{ codigoPostal }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.codigoPostal') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.numeroLicitacion')? 'has-error':'' }}">
+                        <label>Número licitación</label>
+                        <input type="text"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="numeroLicitacion"
+                               value="{{ numeroLicitacion }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.numeroLicitacion') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.tipoLicitacion')? 'has-error':'' }}">
+                        <label>Tipo licitación</label>
+                        <input type="text"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="tipoLicitacion"
+                               value="{{ tipoLicitacion }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.tipoLicitacion') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.fechaLicitacion')? 'has-error':'' }}">
+                        <label>Fecha licitación</label>
+                        <input type="date"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="fechaLicitacion"
+                               value="{{ fechaLicitacion }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.fechaLicitacion') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.inicioObra')? 'has-error':'' }}">
+                        <label>Fecha inico obra</label>
+                        <input type="date"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="inicioObra"
+                               value="{{ inicioObra }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.inicioObra') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.plazo')? 'has-error':'' }}">
+                        <label>Plazo en meses</label>
+                        <input type="number"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="plazo"
+                               value="{{ plazo }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.plazo') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.contratista')? 'has-error':'' }}">
+                        <label>Contratista</label>
+                        <input type="text"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="contratista"
+                               value="{{ contratista }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.contratista') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.anticipoFinancieroNacion')? 'has-error':'' }}">
+                        <label>Anticipo financiero nación</label>
+                        <input type="number"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="anticipoFinancieroNacion"
+                               value="{{ anticipoFinancieroNacion }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.anticipoFinancieroNacion') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.anticipoFinancieroProvincia')? 'has-error':'' }}">
+                        <label>Anticipo financiero nación</label>
+                        <input type="number"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="anticipoFinancieroProvincia"
+                               value="{{ anticipoFinancieroNacion }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.anticipoFinancieroNacion') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.aporteNacion')? 'has-error':'' }}">
+                        <label>aporteNacion</label>
+                        <input type="number"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="aporteNacion"
+                               value="{{ aporteNacion }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.aporteNacion') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.aporteProvincia')? 'has-error':'' }}">
+                        <label>aporteProvincia</label>
+                        <input type="number"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="aporteProvincia"
+                               value="{{ aporteProvincia }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.aporteProvincia') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.ampliacionMontoNacion')? 'has-error':'' }}">
+                        <label>ampliacionMontoNacion</label>
+                        <input type="number"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="ampliacionMontoNacion"
+                               value="{{ ampliacionMontoNacion }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.ampliacionMontoNacion') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.ampliacionMontoProvincia')? 'has-error':'' }}">
+                        <label>ampliacionMontoProvincia</label>
+                        <input type="text"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="ampliacionMontoProvincia"
+                               value="{{ ampliacionMontoProvincia }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.ampliacionMontoProvincia') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.porcentajeEntregaNacion')? 'has-error':'' }}">
+                        <label>porcentajeEntregaNacion</label>
+                        <input type="number"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="porcentajeEntregaNacion"
+                               value="{{ porcentajeEntregaNacion }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.porcentajeEntregaNacion') }} </span>
+                        </small>
+                    </div>
+                    <div class="form-group {{ flash.has('errors.porcentajeEntregaProvincia')? 'has-error':'' }}">
+                        <label>porcentajeEntregaProvincia</label>
+                        <input type="number"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="porcentajeEntregaProvincia"
+                               value="{{ porcentajeEntregaProvincia }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.porcentajeEntregaProvincia') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.coeficienteActivo')? 'has-error':'' }}">
+                        <label>Coeficiente activo</label>
+                        <input type="text"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="coeficienteActivo"
+                               value="{{ coeficienteActivo }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.coeficienteActivo') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.porcentajeReparo')? 'has-error':'' }}">
+                        <label>Porcentaje reparo</label>
+                        <input type="number"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="porcentajeReparo"
+                               value="{{ porcentajeReparo }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.porcentajeReparo') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.bapin')? 'has-error':'' }}">
+                        <label>Bapin</label>
+                        <input type="text"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="bapin"
+                               value="{{ bapin }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.bapin') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.montoContratado')? 'has-error':'' }}">
+                        <label>Monto contratado</label>
+                        <input type="number"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="montoContratado"
+                               value="{{ montoContratado }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.montoContratado') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.presupuestoOficial')? 'has-error':'' }}">
+                        <label>Presupuesto oficial</label>
+                        <input type="number"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="presupuestoOficial"
+                               value="{{ presupuestoOficial }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.presupuestoOficial') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.costoObra')? 'has-error':'' }}">
+                        <label>Costo obra</label>
+                        <input type="number"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="costoObra"
+                               value="{{ costoObra }}"
+                               maxlength="100"
+                               class="form-control"
+                        >
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.costoObra') }} </span>
+                        </small>
+                    </div>
+                    <div class="card-action">
+                        <button class="btn btn-success col-12 col-sm-4 col-md-2 col-lg-2" type="submit" id="submitBtn">
+                <span class="btn-label">
+                    <i class="fas fa-save"></i>
+                </span>
+                            {{ submit_button_label|trans }}
+                        </button>
+                    </div>
+    </form>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/blog/_shared/form/click.submit.button.on.enter.key.press.in.keyboard.js') }}"></script>
+{% endblock %}

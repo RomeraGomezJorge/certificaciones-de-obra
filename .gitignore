@@ -1,0 +1,5 @@
+app/vendor/*
+.idea/*
+app/cache/var/*
+app/cache/log/*
+docker/database/data/*

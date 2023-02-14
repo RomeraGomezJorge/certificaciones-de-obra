@@ -1,0 +1,114 @@
+<aside class="sidebar sidebar-style-2">
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+            <div class="user d-block d-sm-none">
+                <div class="avatar-sm float-left mr-2">
+                    <i class="far fa-user-circle"></i>
+                </div>
+                <div class="info">
+                    <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+								<span>
+                                    {% if app.user.surname is defined %}
+                                        {{ app.user.surname }}, {{ app.user.name }}
+                                        <span class="user-level">{{ app.user.role.description }}</span>
+                                        <span class="caret"></span>
+                                    {% endif %}
+								</span>
+                    </a>
+                    <div class="clearfix"></div>
+
+                    <div class="collapse in" id="collapseExample">
+                        <ul class="nav">
+                            <li>
+                                <a href="{{ path('user_account_management') }}">
+                                    <span class="link-collapse">{{ 'User Management'|trans }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('logout') }}">
+                                    <span class="link-collapse">
+                                        {{ 'Logout'|trans }}
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav nav-primary">
+                <li class="nav-item">
+                    <a href="{{ path('dashboard') }}">
+                        <i class="fas fa-home-alt"></i>
+                        <p>
+                            {{ 'Home'|trans }}
+                        </p>
+                        <span class="caret"></span>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a data-toggle="collapse" href="#certificacion-obra" class="collapsed" aria-expanded="false">
+                        <i class="fas fa-id-card"></i>
+                        <p>
+                            Certificaciones de obra
+                        </p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="certificacion-obra">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{{ path('certificacion_obra_list') }}">
+                                    <span class="sub-item">
+                                        Listar todas
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('certificacion_obra_create') }}">
+                                    <span class="sub-item">
+                                        Crear nueva
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a data-toggle="collapse" href="#user" class="collapsed" aria-expanded="false">
+                        <i class="fas fa-users-cog"></i>
+                        <p>
+                            {{ 'User Management'|trans }}
+                        </p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="user">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{{ path('user_list') }}">
+                                    <span class="sub-item">
+                                        {{ 'All Users'|trans }}
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('user_create') }}">
+                                    <span class="sub-item">
+                                        {{ 'Add new user'|trans }}
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item d-block d-sm-none">
+                    <a href="{{ path('logout') }}" class="collapsed">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <p>{{ 'Cerrar Sessión'|trans }}</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</aside>

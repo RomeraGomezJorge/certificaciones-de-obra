@@ -1,0 +1,29 @@
+certificacion_obra_list:
+  path: /list/{pageLabel}-{page}/{orderLabel}-{order}-{orderBy}/{limitLabel}-{limit}/{filters}
+  defaults: { _controller: App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraGetController, pageLabel: 'page' , page: 1 , orderLabel: 'order' , order: 'createAt' , orderBy: 'desc' , limitLabel: 'rows_per_page' , limit: 10 , filters: null }
+  methods:  [GET,POST]
+
+certificacion_obra_add:
+  path: /create
+  defaults: { _controller: App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraAddController}
+  methods:  [GET]
+
+certificacion_obra_create:
+  path: /create
+  defaults: { _controller: App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraPostController}
+  methods:  [POST]
+
+certificacion_obra_edit:
+  path: /edit/{id}
+  defaults: { _controller: App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraEditController}
+  methods:  [GET]
+
+certificacion_obra_update:
+  path: /update
+  defaults: { _controller: App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraPutController}
+  methods:  [POST]
+
+certificacion_obra_delete:
+  path: /delete
+  defaults: { _controller: App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraDeleteController}
+  methods:  [POST]
