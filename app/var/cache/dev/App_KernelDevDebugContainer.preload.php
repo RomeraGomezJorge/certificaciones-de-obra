@@ -10,7 +10,7 @@ if (in_array(PHP_SAPI, ['cli', 'phpdbg'], true)) {
 }
 
 require dirname(__DIR__, 3).'/vendor/autoload.php';
-require __DIR__.'/Container1v8jK76/App_KernelDevDebugContainer.php';
+require __DIR__.'/ContainerHrCUEHp/App_KernelDevDebugContainer.php';
 
 $classes = [];
 $classes[] = 'Symfony\Bundle\FrameworkBundle\FrameworkBundle';
@@ -109,6 +109,7 @@ $classes[] = 'App\Backoffice\CertificacionObra\Application\Delete\CertificacionO
 $classes[] = 'App\Backoffice\CertificacionObra\Application\Get\Collection\CertificacionObraByCriteriaCounter';
 $classes[] = 'App\Backoffice\CertificacionObra\Application\Get\Collection\CertificacionObraByCriteriaSearcher';
 $classes[] = 'App\Backoffice\CertificacionObra\Application\Get\Single\CertificacionObraFinder';
+$classes[] = 'App\Backoffice\CertificacionObra\Application\Post\CertificacionObraCreator';
 $classes[] = 'App\Backoffice\CertificacionObra\Infrastructure\Persistence\MySqlCertificacionObraRepository';
 $classes[] = 'App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraAddController';
 $classes[] = 'App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraDeleteController';
@@ -116,6 +117,7 @@ $classes[] = 'App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\
 $classes[] = 'App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraGetController';
 $classes[] = 'App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraPostController';
 $classes[] = 'App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraPutController';
+$classes[] = 'App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\ValidationRulesToCreateAndUpdate';
 $classes[] = 'App\Backoffice\Dashboard\Infrastructure\UserInterface\Web\DashboardController';
 $classes[] = 'App\Backoffice\Dashboard\Infrastructure\UserInterface\Web\DashboardGetLearningSupportTeamController';
 $classes[] = 'App\Backoffice\Role\Infrastructure\Persistence\MySqlRoleRepository';

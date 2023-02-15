@@ -23,11 +23,11 @@ class CertificacionObra
 	private string   $numeroLicitacion;
 	private string   $tipoLicitacion;
 	private DateTime $fechaLicitacion;
-	private DateTime $inicioObra;
+	private DateTime $fechaInicioObra;
 	private int      $plazo;
 	private string   $contratista;
 	private float    $anticipoFinancieroNacion;
-	private float    $anticipoFinacieroProvincia;
+	private float    $anticipoFinancieroProvincia;
 	private float    $aporteNacion;
 	private float    $aporteProvincia;
 	private float    $ampliacionMontoNacion;
@@ -93,7 +93,7 @@ class CertificacionObra
 	/**
 	 * @return int
 	 */
-	public function getnumeroObra(): int
+	public function getNumeroObra(): int
 	{
 		return $this->numeroObra;
 	}
@@ -101,7 +101,7 @@ class CertificacionObra
 	/**
 	 * @param int $numeroObra
 	 */
-	public function setnumeroObra(int $numeroObra): void
+	public function setNumeroObra(int $numeroObra): void
 	{
 		$this->numeroObra = $numeroObra;
 	}
@@ -285,17 +285,17 @@ class CertificacionObra
 	/**
 	 * @return DateTime
 	 */
-	public function getInicioObra(): DateTime
+	public function getFechaInicioObra(): DateTime
 	{
-		return $this->inicioObra;
+		return $this->fechaInicioObra;
 	}
 
 	/**
-	 * @param DateTime $inicioObra
+	 * @param DateTime $fechaInicioObra
 	 */
-	public function setInicioObra(DateTime $inicioObra): void
+	public function setFechaInicioObra(DateTime $fechaInicioObra): void
 	{
-		$this->inicioObra = $inicioObra;
+		$this->fechaInicioObra = $fechaInicioObra;
 	}
 
 	/**
@@ -333,7 +333,7 @@ class CertificacionObra
 	/**
 	 * @return float
 	 */
-	public function getanticipoFinancieroNacion(): float
+	public function getAnticipoFinancieroNacion(): float
 	{
 		return $this->anticipoFinancieroNacion;
 	}
@@ -341,7 +341,7 @@ class CertificacionObra
 	/**
 	 * @param float $anticipoFinancieroNacion
 	 */
-	public function setanticipoFinancieroNacion(float $anticipoFinancieroNacion): void
+	public function setAnticipoFinancieroNacion(float $anticipoFinancieroNacion): void
 	{
 		$this->anticipoFinancieroNacion = $anticipoFinancieroNacion;
 	}
@@ -349,17 +349,17 @@ class CertificacionObra
 	/**
 	 * @return float
 	 */
-	public function getAnticipoFinacieroProvincia(): float
+	public function getAnticipoFinancieroProvincia(): float
 	{
-		return $this->anticipoFinacieroProvincia;
+		return $this->anticipoFinancieroProvincia;
 	}
 
 	/**
-	 * @param float $anticipoFinacieroProvincia
+	 * @param float $anticipoFinancieroProvincia
 	 */
-	public function setAnticipoFinacieroProvincia(float $anticipoFinacieroProvincia): void
+	public function setAnticipoFinancieroProvincia(float $anticipoFinancieroProvincia): void
 	{
-		$this->anticipoFinacieroProvincia = $anticipoFinacieroProvincia;
+		$this->anticipoFinancieroProvincia = $anticipoFinancieroProvincia;
 	}
 
 	/**
@@ -429,7 +429,7 @@ class CertificacionObra
 	/**
 	 * @return float
 	 */
-	public function getporcentajeEntregaNacion(): float
+	public function getPorcentajeEntregaNacion(): float
 	{
 		return $this->porcentajeEntregaNacion;
 	}
@@ -437,7 +437,7 @@ class CertificacionObra
 	/**
 	 * @param float $porcentajeEntregaNacion
 	 */
-	public function setporcentajeEntregaNacion(float $porcentajeEntregaNacion): void
+	public function setPorcentajeEntregaNacion(float $porcentajeEntregaNacion): void
 	{
 		$this->porcentajeEntregaNacion = $porcentajeEntregaNacion;
 	}
@@ -445,7 +445,7 @@ class CertificacionObra
 	/**
 	 * @return float
 	 */
-	public function getporcentajeEntregaProvincia(): float
+	public function getPorcentajeEntregaProvincia(): float
 	{
 		return $this->porcentajeEntregaProvincia;
 	}
@@ -453,7 +453,7 @@ class CertificacionObra
 	/**
 	 * @param float $porcentajeEntregaProvincia
 	 */
-	public function setporcentajeEntregaProvincia(float $porcentajeEntregaProvincia): void
+	public function setPorcentajeEntregaProvincia(float $porcentajeEntregaProvincia): void
 	{
 		$this->porcentajeEntregaProvincia = $porcentajeEntregaProvincia;
 	}

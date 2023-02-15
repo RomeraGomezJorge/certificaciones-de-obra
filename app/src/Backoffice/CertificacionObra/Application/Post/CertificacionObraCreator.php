@@ -12,91 +12,91 @@ use DateTime;
 
 final class CertificacionObraCreator
 {
-	private CertificacionObraRepository $repository;
+    private CertificacionObraRepository $repository;
 
-	public function __construct(
-		CertificacionObraRepository $repository
-	)
-	{
-		$this->repository = $repository;
-	}
+    public function __construct(
+        CertificacionObraRepository $repository
+    )
+    {
+        $this->repository = $repository;
+    }
 
-	public function __invoke(
-		$id,
-		$nombres,
-		$apellido,
-		$numeroObra,
-		$etapa,
-		$permiteModificarComputo,
-		$certificacionManual,
-		$insGrabaCert,
-		$programa,
-		$departamento,
-		$localidad,
-		$codigoPostal,
-		$numeroLicitacion,
-		$tipoLicitacion,
-		$fechaLicitacion,
-		$inicioObra,
-		$plazo,
-		$contratista,
-		$anticipoFinancieroNacion,
-		$anticipoFinacieroProvincia,
-		$aporteNacion,
-		$aporteProvincia,
-		$ampliacionMontoNacion,
-		$ampliacionMontoProvincia,
-		$porcentajeEntregaNacion,
-		$porcentajeEntregaProvincia,
-		$coeficienteActivo,
-		$porcentajeReparo,
-		$bapin,
-		$montoContratado,
-		$presupuestoOficial,
-		$costoObra
-	)
-	{
-		$id = new Uuid($id);
+    public function __invoke(
+        $id,
+        $nombres,
+        $apellido,
+        $numeroObra,
+        $etapa,
+        $permiteModificarComputo,
+        $certificacionManual,
+        $insGrabaCert,
+        $programa,
+        $departamento,
+        $localidad,
+        $codigoPostal,
+        $numeroLicitacion,
+        $tipoLicitacion,
+        $fechaLicitacion,
+        $fechaInicioObra,
+        $plazo,
+        $contratista,
+        $anticipoFinancieroNacion,
+        $anticipoFinancieroProvincia,
+        $aporteNacion,
+        $aporteProvincia,
+        $ampliacionMontoNacion,
+        $ampliacionMontoProvincia,
+        $porcentajeEntregaNacion,
+        $porcentajeEntregaProvincia,
+        $coeficienteActivo,
+        $porcentajeReparo,
+        $bapin,
+        $montoContratado,
+        $presupuestoOficial,
+        $costoObra
+    )
+    {
+        $id                = new Uuid($id);
+        $createAt          = new DateTime();
+        $certificacionObra = new CertificacionObra();
+        $fechaLicitacion   = new \DateTime($fechaLicitacion);
+        $fechaInicioObra   = new \DateTime($fechaInicioObra);
 
-		$createAt = new DateTime();
+        $certificacionObra->setId($id->value());
+        $certificacionObra->setNombres($nombres);
+        $certificacionObra->setApellido($apellido);
+        $certificacionObra->setNumeroObra((int)$numeroObra);
+        $certificacionObra->setEtapa($etapa);
+        $certificacionObra->setPermiteModificarComputo((bool)$permiteModificarComputo);
+        $certificacionObra->setCertificacionManual((bool)$certificacionManual);
+        $certificacionObra->setInsGrabaCert((bool)$insGrabaCert);
+        $certificacionObra->setPrograma($programa);
+        $certificacionObra->setDepartamento($departamento);
+        $certificacionObra->setLocalidad($localidad);
+        $certificacionObra->setCodigoPostal((int)$codigoPostal);
+        $certificacionObra->setNumeroLicitacion($numeroLicitacion);
+        $certificacionObra->setTipoLicitacion($tipoLicitacion);
+        $certificacionObra->setFechaLicitacion($fechaLicitacion);
+        $certificacionObra->setFechaInicioObra($fechaInicioObra);
+        $certificacionObra->setPlazo((int)$plazo);
+        $certificacionObra->setContratista($contratista);
+        $certificacionObra->setanticipoFinancieroNacion((float)$anticipoFinancieroNacion);
+        $certificacionObra->setanticipoFinancieroProvincia((float)$anticipoFinancieroProvincia);
+        $certificacionObra->setAporteNacion((float)$aporteNacion);
+        $certificacionObra->setAporteProvincia((float)$aporteProvincia);
+        $certificacionObra->setAmpliacionMontoNacion((float)$ampliacionMontoNacion);
+        $certificacionObra->setAmpliacionMontoProvincia((float)$ampliacionMontoProvincia);
+        $certificacionObra->setporcentajeEntregaNacion((float)$porcentajeEntregaNacion);
+        $certificacionObra->setporcentajeEntregaProvincia((float)$porcentajeEntregaProvincia);
+        $certificacionObra->setCoeficienteActivo((float)$coeficienteActivo);
+        $certificacionObra->setPorcentajeReparo((float)$porcentajeReparo);
+        $certificacionObra->setBapin($bapin);
+        $certificacionObra->setMontoContratado((float)$montoContratado);
+        $certificacionObra->setPresupuestoOficial((float)$presupuestoOficial);
+        $certificacionObra->setCostoObra((float)$costoObra);
+        $certificacionObra->setCreateAt($createAt);
 
-		$certificacionObra = new CertificacionObra();
+        $this->repository->save($certificacionObra);
 
-		$certificacionObra->setId($id->value());
-		$certificacionObra->setNombres($nombres);
-		$certificacionObra->setApellido($apellido);
-		$certificacionObra->setnumeroObra($numeroObra);
-		$certificacionObra->setEtapa($etapa);
-		$certificacionObra->setPermiteModificarComputo($permiteModificarComputo);
-		$certificacionObra->setCertificacionManual($certificacionManual);
-		$certificacionObra->setInsGrabaCert($insGrabaCert);
-		$certificacionObra->setPrograma($programa);
-		$certificacionObra->setDepartamento($departamento);
-		$certificacionObra->setLocalidad($localidad);
-		$certificacionObra->setCodigoPostal($codigoPostal);
-		$certificacionObra->setNumeroLicitacion($numeroLicitacion);
-		$certificacionObra->setTipoLicitacion($tipoLicitacion);
-		$certificacionObra->setFechaLicitacion($fechaLicitacion);
-		$certificacionObra->setInicioObra($inicioObra);
-		$certificacionObra->setPlazo($plazo);
-		$certificacionObra->setContratista($contratista);
-		$certificacionObra->setanticipoFinancieroNacion($anticipoFinancieroNacion);
-		$certificacionObra->setAnticipoFinacieroProvincia($anticipoFinacieroProvincia);
-		$certificacionObra->setAporteNacion($aporteNacion);
-		$certificacionObra->setAporteProvincia($aporteProvincia);
-		$certificacionObra->setAmpliacionMontoNacion($ampliacionMontoNacion);
-		$certificacionObra->setAmpliacionMontoProvincia($ampliacionMontoProvincia);
-		$certificacionObra->setporcentajeEntregaNacion($porcentajeEntregaNacion);
-		$certificacionObra->setporcentajeEntregaProvincia($porcentajeEntregaProvincia);
-		$certificacionObra->setCoeficienteActivo($coeficienteActivo);
-		$certificacionObra->setPorcentajeReparo($porcentajeReparo);
-		$certificacionObra->setBapin($bapin);
-		$certificacionObra->setMontoContratado($montoContratado);
-		$certificacionObra->setPresupuestoOficial($presupuestoOficial);
-		$certificacionObra->setCostoObra($costoObra);
-		$certificacionObra->setCreateAt($createAt);
-
-		$this->repository->save($certificacionObra);
-
-	}
+    }
 }

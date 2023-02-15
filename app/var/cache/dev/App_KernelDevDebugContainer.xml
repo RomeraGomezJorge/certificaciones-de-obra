@@ -6289,6 +6289,13 @@
         <argument key="itemsByCriteriaSearcher" type="service_closure" id="App\Backoffice\CertificacionObra\Application\Get\Collection\CertificacionObraByCriteriaSearcher"/>
       </argument>
     </service>
+    <service id=".service_locator.wGETl8w" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="creator" type="service_closure" id="App\Backoffice\CertificacionObra\Application\Post\CertificacionObraCreator"/>
+        <argument key="validationRules" type="service_closure" id="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\ValidationRulesToCreateAndUpdate"/>
+      </argument>
+    </service>
     <service id=".service_locator.yxQU6qF" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6364,7 +6371,7 @@
         <argument key="validator" type="service_closure" id="validator"/>
       </argument>
     </service>
-    <service id=".service_locator.JJPhSd0" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.XGy9ZvK" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Backoffice\Authentication\Login\SecurityController::login" type="service_closure" id=".service_locator.UDgw6Ol"/>
@@ -6400,6 +6407,7 @@
         <argument key="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraGetController::formatFlashErrors" type="service_closure" id=".service_locator.F_AUBeP"/>
         <argument key="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraGetController::jsonResponseWithErrors" type="service_closure" id=".service_locator.ZyzVCGq"/>
         <argument key="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraGetController::redirectWithErrors" type="service_closure" id=".service_locator.DiO6q2v"/>
+        <argument key="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraPostController::__invoke" type="service_closure" id=".service_locator.wGETl8w"/>
         <argument key="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraPostController::formatFlashErrors" type="service_closure" id=".service_locator.F_AUBeP"/>
         <argument key="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraPostController::jsonResponseWithErrors" type="service_closure" id=".service_locator.ZyzVCGq"/>
         <argument key="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraPostController::redirectWithErrors" type="service_closure" id=".service_locator.DiO6q2v"/>
@@ -6506,6 +6514,8 @@
         <argument key="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraGetController:formatFlashErrors" type="service_closure" id=".service_locator.F_AUBeP"/>
         <argument key="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraGetController:jsonResponseWithErrors" type="service_closure" id=".service_locator.ZyzVCGq"/>
         <argument key="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraGetController:redirectWithErrors" type="service_closure" id=".service_locator.DiO6q2v"/>
+        <argument key="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraPostController:__invoke" type="service_closure" id=".service_locator.wGETl8w"/>
+        <argument key="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraPostController" type="service_closure" id=".service_locator.wGETl8w"/>
         <argument key="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraPostController:formatFlashErrors" type="service_closure" id=".service_locator.F_AUBeP"/>
         <argument key="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraPostController:jsonResponseWithErrors" type="service_closure" id=".service_locator.ZyzVCGq"/>
         <argument key="App\Backoffice\CertificacionObra\Infrastructure\UserInterface\Web\CertificacionObraPostController:redirectWithErrors" type="service_closure" id=".service_locator.DiO6q2v"/>
@@ -7190,12 +7200,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.JJPhSd0"/>
+      <argument type="service" id=".service_locator.XGy9ZvK"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.JJPhSd0"/>
+      <argument type="service" id=".service_locator.XGy9ZvK"/>
     </service>
     <service id=".doctrine.orm.default_metadata_driver.inner" class="Doctrine\Persistence\Mapping\Driver\MappingDriverChain">
       <call method="addDriver">
@@ -7573,7 +7583,7 @@
     <service id="SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface" alias="symfonycasts.reset_password.helper"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.0GV1BZZ" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.JJPhSd0"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.XGy9ZvK"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.Hllcktv"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -7600,6 +7610,7 @@
     <service id=".service_locator.5CC4WcJ" alias=".service_locator.NeSptcJ"/>
     <service id=".service_locator.I2iA7pI" alias=".service_locator.XJj9IlB"/>
     <service id=".service_locator.eNqNNAL" alias=".service_locator.t7yH_BB"/>
+    <service id=".service_locator.DliBQC8" alias=".service_locator.wGETl8w"/>
     <service id=".service_locator.18pAms4" alias=".service_locator.yxQU6qF"/>
     <service id=".service_locator.yEEwQ3b" alias=".service_locator.n20n805"/>
     <service id=".service_locator.wxaX20L" alias=".service_locator.VWV9P89"/>

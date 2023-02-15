@@ -1,12 +1,17 @@
 {% extends 'backoffice/_shared/formToHandleItem.base.html.twig' %}
 {% block form %}
-    <form action="{{ path(form_action_attribute) }}" method="post" id="form"
-          novalidate="novalidate">
+    <form action="{{ path(form_action_attribute) }}" method="post" id="form" novalidate="novalidate">
+
         <div class="card-body">
+
             <div class="row">
+
                 <div class="col-lg-12">
+
                     <input type="hidden" name="id" value="{{ id }}">
+
                     <input type="hidden" name="csrf_token" value="{{ csrf_token(id) }}">
+
                     <div class="form-group {{ flash.has('errors.nombres')? 'has-error':'' }}">
                         <label>Nombres</label>
                         <input type="text"
@@ -48,6 +53,7 @@
                             <span class="has-error">{{ flash.has('errors.numeroObra') }} </span>
                         </small>
                     </div>
+
                     <div class="form-group {{ flash.has('errors.etapa')? 'has-error':'' }}">
                         <label>Etapa</label>
                         <input type="text"
@@ -61,30 +67,41 @@
                         </small>
                     </div>
 
-                    <div class="form-group {{ flash.has('errors.permiteModificarComputo')? 'has-error':'' }}">
-                        <label>Permite modificar computo</label>
-                        <input type="text"
-                               placeholder=" - {{ 'Optional'|trans }} -"
-                               name="permiteModificarComputo"
-                               value="{{ permiteModificarComputo }}"
-                               class="form-control"
-                        >
+                    <div class="form-check-inline {% if flash.has('errors.permiteModificarComputo') %} has-error {% endif %}">
+                        <div class="custom-control custom-checkbox">
+                            <input name="permiteModificarComputo"  type="checkbox" class="custom-control-input" id="permiteModificarComputo">
+                            <label class="custom-control-label" for="permiteModificarComputo">Permite modificar computo</label>
+                        </div>
                         <small class="errorLabelContainer form-text text-muted text-danger">
-                            <span class="has-error">{{ flash.has('errors.permiteModificarComputo') }} </span>
+                            {% if flash.has('errors.permiteModificarComputo') %}
+                                <span class="has-error">{{ flash.get('errors.permiteModificarComputo') }} </span>
+                            {% endif %}
                         </small>
                     </div>
 
-                    <div class="form-group {{ flash.has('errors.insGrabaCert')? 'has-error':'' }}">
-                        <label>Ins. Graba. Cert.</label>
-                        <input type="text"
-                               placeholder=" - {{ 'Optional'|trans }} -"
-                               name="insGrabaCert"
-                               value="{{ insGrabaCert }}"
-                               maxlength="100"
-                               class="form-control"
-                        >
+                    <div class="form-check-inline {% if flash.has('errors.certificacionManual') %} has-error {% endif %}">
+                        <div class="custom-control custom-checkbox">
+                            <input name="certificacionManual"  type="checkbox" class="custom-control-input" id="certificacionManual">
+                            <label class="custom-control-label" for="certificacionManual">Certificacion manual</label>
+                        </div>
                         <small class="errorLabelContainer form-text text-muted text-danger">
-                            <span class="has-error">{{ flash.has('errors.insGrabaCert') }} </span>
+                            {% if flash.has('errors.certificacionManual') %}
+                                <span class="has-error">{{ flash.get('errors.certificacionManual') }} </span>
+                            {% endif %}
+                        </small>
+                    </div>
+
+
+
+                    <div class="form-check-inline {% if flash.has('errors.insGrabaCert') %} has-error {% endif %}">
+                        <div class="custom-control custom-checkbox">
+                            <input name="insGrabaCert"  type="checkbox" class="custom-control-input" id="insGrabaCert">
+                            <label class="custom-control-label" for="insGrabaCert">Ins. Graba. Cert.</label>
+                        </div>
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            {% if flash.has('errors.insGrabaCert') %}
+                                <span class="has-error">{{ flash.get('errors.insGrabaCert') }} </span>
+                            {% endif %}
                         </small>
                     </div>
 
@@ -101,6 +118,7 @@
                             <span class="has-error">{{ flash.has('errors.programa') }} </span>
                         </small>
                     </div>
+
                     <div class="form-group {{ flash.has('errors.departamento')? 'has-error':'' }}">
                         <label>Departamento</label>
                         <input type="text"
@@ -131,7 +149,7 @@
 
                     <div class="form-group {{ flash.has('errors.codigoPostal')? 'has-error':'' }}">
                         <label>Codigo postal</label>
-                        <input type="text"
+                        <input type="number"
                                placeholder=" - {{ 'Optional'|trans }} -"
                                name="codigoPostal"
                                value="{{ codigoPostal }}"
@@ -185,17 +203,17 @@
                         </small>
                     </div>
 
-                    <div class="form-group {{ flash.has('errors.inicioObra')? 'has-error':'' }}">
+                    <div class="form-group {{ flash.has('errors.fechaInicioObra')? 'has-error':'' }}">
                         <label>Fecha inico obra</label>
                         <input type="date"
                                placeholder=" - {{ 'Optional'|trans }} -"
-                               name="inicioObra"
-                               value="{{ inicioObra }}"
+                               name="fechaInicioObra"
+                               value="{{ fechaInicioObra }}"
                                maxlength="100"
                                class="form-control"
                         >
                         <small class="errorLabelContainer form-text text-muted text-danger">
-                            <span class="has-error">{{ flash.has('errors.inicioObra') }} </span>
+                            <span class="has-error">{{ flash.has('errors.fechaInicioObra') }} </span>
                         </small>
                     </div>
 
@@ -299,7 +317,7 @@
 
                     <div class="form-group {{ flash.has('errors.ampliacionMontoProvincia')? 'has-error':'' }}">
                         <label>ampliacionMontoProvincia</label>
-                        <input type="text"
+                        <input type="number"
                                placeholder=" - {{ 'Optional'|trans }} -"
                                name="ampliacionMontoProvincia"
                                value="{{ ampliacionMontoProvincia }}"
@@ -324,6 +342,7 @@
                             <span class="has-error">{{ flash.has('errors.porcentajeEntregaNacion') }} </span>
                         </small>
                     </div>
+
                     <div class="form-group {{ flash.has('errors.porcentajeEntregaProvincia')? 'has-error':'' }}">
                         <label>porcentajeEntregaProvincia</label>
                         <input type="number"
@@ -421,14 +440,22 @@
                             <span class="has-error">{{ flash.has('errors.costoObra') }} </span>
                         </small>
                     </div>
+
                     <div class="card-action">
                         <button class="btn btn-success col-12 col-sm-4 col-md-2 col-lg-2" type="submit" id="submitBtn">
-                <span class="btn-label">
-                    <i class="fas fa-save"></i>
-                </span>
+                            <span class="btn-label">
+                                <i class="fas fa-save"></i>
+                            </span>
                             {{ submit_button_label|trans }}
                         </button>
                     </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </form>
 {% endblock %}
 {% block javascripts %}

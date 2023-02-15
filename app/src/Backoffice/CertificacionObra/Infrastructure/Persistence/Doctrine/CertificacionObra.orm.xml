@@ -4,38 +4,38 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <entity name="App\Backoffice\CertificacionObra\Domain\CertificacionObra" table="certificacion_obra">
 
-        <id name="id" type="string" column="id" length="36"/>
-        <field name="nombres " type="string" column="nombres" length="100" nullable="true"/>
-        <field name="apellido " type="string" column="apellido" length="100" nullable="true"/>
-        <field name="numeroObra " type="string" column="numeroObra" length="100" nullable="true"/>
-        <field name="etapa " type="string" column="etapa" length="100" nullable="true"/>
-        <field name="permiteModificarComputo " type="string" column="permiteModificarComputo" length="100" nullable="true"/>
-        <field name="certificacionManual " type="string" column="certificacionManual" length="100" nullable="true"/>
-        <field name="insGrabaCert " type="string" column="insGrabaCert" length="100" nullable="true"/>
-        <field name="programa " type="string" column="programa" length="100" nullable="true"/>
-        <field name="departamento " type="string" column="departamento" length="100" nullable="true"/>
-        <field name="localidad " type="string" column="localidad" length="100" nullable="true"/>
-        <field name="codigoPostal " type="string" column="codigoPostal" length="100" nullable="true"/>
-        <field name="numeroLicitacion " type="string" column="numeroLicitacion" length="100" nullable="true"/>
-        <field name="tipoLicitacion " type="string" column="tipoLicitacion" length="100" nullable="true"/>
-        <field name="fechaLicitacion " type="string" column="fechaLicitacion" length="100" nullable="true"/>
-        <field name="inicioObra " type="string" column="inicioObra" length="100" nullable="true"/>
-        <field name="plazo " type="string" column="plazo" length="100" nullable="true"/>
-        <field name="contratista " type="string" column="contratista" length="100" nullable="true"/>
-        <field name="anticipoFinancieroNacion " type="string" column="anticipoFinancieroNacion" length="100" nullable="true"/>
-        <field name="anticipoFinacieroProvincia " type="string" column="anticipoFinacieroProvincia" length="100" nullable="true"/>
-        <field name="aporteNacion " type="string" column="aporteNacion" length="100" nullable="true"/>
-        <field name="aporteProvincia " type="string" column="aporteProvincia" length="100" nullable="true"/>
-        <field name="ampliacionMontoNacion " type="string" column="ampliacionMontoNacion" length="100" nullable="true"/>
-        <field name="ampliacionMontoProvincia " type="string" column="ampliacionMontoProvincia" length="100" nullable="true"/>
-        <field name="porcentajeEntregaNacion " type="string" column="porcentajeEntregaNacion" length="100" nullable="true"/>
-        <field name="porcentajeEntregaProvincia " type="string" column="porcentajeEntregaProvincia" length="100" nullable="true"/>
-        <field name="coeficienteActivo " type="string" column="coeficienteActivo" length="100" nullable="true"/>
-        <field name="porcentajeReparo " type="string" column="porcentajeReparo" length="100" nullable="true"/>
-        <field name="bapin " type="string" column="bapin" length="100" nullable="true"/>
-        <field name="montoContratado " type="string" column="montoContratado" length="100" nullable="true"/>
-        <field name="presupuestoOficial " type="string" column="presupuestoOficial" length="100" nullable="true"/>
-        <field name="costoObra " type="string" column="costoObra" length="100" nullable="true"/>
-        <field name="createAt" type="datetime" column="create_at" nullable="false"/>
+        <id name="id"                               type="string"                       column="id" length="36"/>
+        <field name="nombres"                       type="string"   nullable="true"     column="nombres" length="100" />
+        <field name="apellido"                      type="string"   nullable="true"     column="apellido" length="100" />
+        <field name="numeroObra"                    type="integer"  nullable="true"     column="numero_obra" />
+        <field name="etapa"                         type="string"   nullable="true"     column="etapa" length="100" />
+        <field name="permiteModificarComputo"       type="boolean"  nullable="true"     column="permite_modificar_computo" />
+        <field name="certificacionManual"           type="boolean"  nullable="true"     column="certificacion_manual" />
+        <field name="insGrabaCert"                  type="boolean"  nullable="true"     column="ins_graba_cert" />
+        <field name="programa"                      type="string"   nullable="true"     column="programa" length="100" />
+        <field name="departamento"                  type="string"   nullable="true"     column="departamento" length="100" />
+        <field name="localidad"                     type="string"   nullable="true"     column="localidad" />
+        <field name="codigoPostal"                  type="integer"  nullable="true"     column="codigo_postal" />
+        <field name="numeroLicitacion"              type="string"   nullable="true"     column="numero_licitacion" length="100" />
+        <field name="tipoLicitacion"                type="string"   nullable="true"     column="tipo_licitacion" length="100" />
+        <field name="fechaLicitacion"               type="date"     nullable="true"     column="fecha_licitacion" />
+        <field name="fechaInicioObra"               type="date"     nullable="true"     column="fecha_inicio_obra" />
+        <field name="plazo"                         type="integer"  nullable="true"     column="plazo" />
+        <field name="contratista"                   type="string"   nullable="true"     column="contratista" length="100" />
+        <field name="anticipoFinancieroNacion"      type="decimal"  nullable="true"     column="anticipo_financiero_nacion" scale="12" precision="2" />
+        <field name="anticipoFinancieroProvincia"   type="decimal"  nullable="true"     column="anticipo_financiero_provincia" scale="12" precision="2" />
+        <field name="aporteNacion"                  type="decimal"  nullable="true"     column="aporte_nacion" scale="12" precision="2" />
+        <field name="aporteProvincia"               type="decimal"  nullable="true"     column="aporte_provincia" scale="12" precision="2"/>
+        <field name="ampliacionMontoNacion"         type="decimal"  nullable="true"     column="ampliacion_monto_nacion" scale="12" precision="2" />
+        <field name="ampliacionMontoProvincia"      type="decimal"  nullable="true"     column="ampliacion_monto_provincia" scale="12" precision="2" />
+        <field name="porcentajeEntregaNacion"       type="decimal"  nullable="true"     column="porcentaje_entrega_nacion" scale="12" precision="2" />
+        <field name="porcentajeEntregaProvincia"    type="decimal"  nullable="true"     column="porcentaje_entrega_provincia" scale="12" precision="2" />
+        <field name="coeficienteActivo"             type="decimal"  nullable="true"     column="coeficiente_activo" scale="12" precision="2" />
+        <field name="porcentajeReparo"              type="decimal"  nullable="true"     column="porcentaje_reparo" scale="12" precision="2" />
+        <field name="bapin"                         type="string"   nullable="true"     column="bapin" length="100" />
+        <field name="montoContratado"               type="decimal"  nullable="true"     column="monto_contratado" scale="12" precision="2"/>
+        <field name="presupuestoOficial"            type="decimal"  nullable="true"     column="presupuesto_oficial" scale="12" precision="2"/>
+        <field name="costoObra"                     type="decimal"   nullable="true"    column="costo_obra" scale="12" precision="2"/>
+        <field name="createAt"                      type="datetime" nullable="false"    column="create_at" />
     </entity>
 </doctrine-mapping>

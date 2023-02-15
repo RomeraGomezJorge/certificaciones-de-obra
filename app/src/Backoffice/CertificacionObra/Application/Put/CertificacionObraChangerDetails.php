@@ -39,11 +39,11 @@ final class CertificacionObraChangerDetails
 		$numeroLicitacion,
 		$tipoLicitacion,
 		$fechaLicitacion,
-		$inicioObra,
+		$fechaInicioObra,
 		$plazo,
 		$contratista,
 		$anticipoFinancieroNacion,
-		$anticipoFinacieroProvincia,
+		$anticipoFinancieroProvincia,
 		$aporteNacion,
 		$aporteProvincia,
 		$ampliacionMontoNacion,
@@ -74,11 +74,11 @@ final class CertificacionObraChangerDetails
 		$certificacionObra->setNumeroLicitacion($numeroLicitacion);
 		$certificacionObra->setTipoLicitacion($tipoLicitacion);
 		$certificacionObra->setFechaLicitacion($fechaLicitacion);
-		$certificacionObra->setInicioObra($inicioObra);
+		$certificacionObra->setFechaInicioObra($fechaInicioObra);
 		$certificacionObra->setPlazo($plazo);
 		$certificacionObra->setContratista($contratista);
 		$certificacionObra->setanticipoFinancieroNacion($anticipoFinancieroNacion);
-		$certificacionObra->setAnticipoFinacieroProvincia($anticipoFinacieroProvincia);
+		$certificacionObra->setanticipoFinancieroProvincia($anticipoFinancieroProvincia);
 		$certificacionObra->setAporteNacion($aporteNacion);
 		$certificacionObra->setAporteProvincia($aporteProvincia);
 		$certificacionObra->setAmpliacionMontoNacion($ampliacionMontoNacion);
