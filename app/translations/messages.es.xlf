@@ -697,6 +697,10 @@
         <source>Next</source>
         <target>Siguiente</target>
       </trans-unit>
+      <trans-unit id="tdd331" resname='Previous'>
+        <source>Previous</source>
+        <target>Anterior</target>
+      </trans-unit>
       <trans-unit id="z2d331" resname='Employee'>
         <source>Employee</source>
         <target>Empleados</target>
