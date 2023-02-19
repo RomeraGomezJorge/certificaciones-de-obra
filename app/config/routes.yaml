@@ -2,9 +2,9 @@ user_directory:
   resource: '../src/Backoffice/User/Infrastructure/UserInterface/Routes/user_routes.yaml'
   prefix: /backoffice/user
 
-job_designation_directory:
-  resource: '../src/Backoffice/CertificacionObra/Infrastructure/UserInterface/Routes/certificacion_obra_routes.yaml'
-  prefix: /backoffice/job-designation
+obra_directory:
+  resource: '../src/Backoffice/Obra/Infrastructure/UserInterface/Routes/obra_routes.yaml'
+  prefix: /backoffice/obra
 
 reset_password_request_directory:
   resource: '../src/Backoffice/Authentication/ResetPasswordRequest/Infrastructure/UserInterface/Routes/reset_password_request_routes.yaml'

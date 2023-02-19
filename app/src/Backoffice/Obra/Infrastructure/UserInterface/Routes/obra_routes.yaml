@@ -1,0 +1,29 @@
+obra_list:
+  path: /list/{pageLabel}-{page}/{orderLabel}-{order}-{orderBy}/{limitLabel}-{limit}/{filters}
+  defaults: { _controller: App\Backoffice\Obra\Infrastructure\UserInterface\Web\ObraGetController, pageLabel: 'page' , page: 1 , orderLabel: 'order' , order: 'createAt' , orderBy: 'desc' , limitLabel: 'rows_per_page' , limit: 10 , filters: null }
+  methods:  [GET,POST]
+
+obra_add:
+  path: /create
+  defaults: { _controller: App\Backoffice\Obra\Infrastructure\UserInterface\Web\ObraAddController}
+  methods:  [GET]
+
+obra_create:
+  path: /create
+  defaults: { _controller: App\Backoffice\Obra\Infrastructure\UserInterface\Web\ObraPostController}
+  methods:  [POST]
+
+obra_edit:
+  path: /edit/{id}
+  defaults: { _controller: App\Backoffice\Obra\Infrastructure\UserInterface\Web\ObraEditController}
+  methods:  [GET]
+
+obra_update:
+  path: /update
+  defaults: { _controller: App\Backoffice\Obra\Infrastructure\UserInterface\Web\ObraPutController}
+  methods:  [POST]
+
+obra_delete:
+  path: /delete
+  defaults: { _controller: App\Backoffice\Obra\Infrastructure\UserInterface\Web\ObraDeleteController}
+  methods:  [POST]

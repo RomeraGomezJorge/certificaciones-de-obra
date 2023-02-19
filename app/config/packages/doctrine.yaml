@@ -25,11 +25,11 @@ doctrine:
         alias: App
 
 
-      App\Backoffice\CertificacionObra:
+      App\Backoffice\Obra:
         is_bundle: false
         type: xml
-        dir: '%kernel.project_dir%/src/Backoffice/CertificacionObra/Infrastructure/Persistence/Doctrine'
-        prefix: 'App\Backoffice\CertificacionObra\Domain'
+        dir: '%kernel.project_dir%/src/Backoffice/Obra/Infrastructure/Persistence/Doctrine'
+        prefix: 'App\Backoffice\Obra\Domain'
         alias: App
 
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Backoffice\Obra\Domain\Obra" table="obra">
+        <id name="id"                                   type="string"                       column="id"                                     length="36"/>
+        <field name="nombreObra"                        type="string"   nullable="true"     column="nombre_obra"                            length="255" />
+        <field name="fuenteFinanciera"                  type="string"   nullable="true"     column="fuente_financiera"                      length="4" />
+        <field name="codigoPresupuestario"              type="integer"  nullable="true"     column="codigo_presupuestario"                  length="100" />
+        <field name="expedientePrincipal"               type="string"   nullable="true"     column="expediente_principal"                   length="100" />
+        <field name="montoObra"                         type="decimal"  nullable="true"     column="monto_obra"                             scale="12" precision="2"/>
+        <field name="presupuestoNecesario"              type="decimal"  nullable="true"     column="presupuesto_necesario"                  scale="12" precision="2" />
+        <field name="presupuestoDisponibleRegularizado" type="decimal"  nullable="true"     column="presupuesto_disponible_regularizado"    scale="12" precision="2" />
+        <field name="estadoPresupuestario"              type="string"   nullable="true"     column="estado_presupuestario"                  length="4" />
+        <field name="estadoObra"                        type="string"   nullable="true"     column="estado_obra"                            length="4" />
+        <field name="estadoTramite"                     type="string"   nullable="true"     column="estado_tramite"                         length="255" />
+        <field name="createAt"                          type="datetime" nullable="false"    column="create_at" />
+    </entity>
+</doctrine-mapping>

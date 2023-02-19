@@ -1,0 +1,205 @@
+{% extends 'backoffice/_shared/formToHandleItem.base.html.twig' %}
+{% block form %}
+
+    <form action="{{ path(form_action_attribute) }}" method="post" id="form" novalidate="novalidate">
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-lg-12">
+
+                    <div class="wizard-container wizard-round">
+
+                        <input type="hidden" name="id" value="{{ id }}">
+
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token(id) }}">
+
+                        <div class="form-group {{ flash.has('errors.nombreObra')? 'has-error':'' }}">
+                            <label>Obra</label>
+                            <input type="text"
+                                   placeholder=" - {{ 'Optional'|trans }} -"
+                                   name="nombreObra"
+                                   value="{{ nombreObra }}"
+                                   maxlength="100"
+                                   class="form-control"
+                                   autofocus
+                            />
+                            <small class="errorLabelContainer form-text text-muted text-danger">
+                                <span class="has-error">{{ flash.has('errors.nombreObra') }} </span>
+                            </small>
+                        </div>
+
+                        <div class="form-group {% if flash.has('errors.fuenteFinanciera') %} has-error {% endif %}">
+                            <div class="form-check" id="roles">
+                                <label>Fuente financiera</label><br>
+                                {% for key,value  in fuente_financiera_choices %}
+                                    <label class="form-radio-label">
+                                        <input class="form-radio-input"
+                                               type="radio"
+                                               name="fuenteFinanciera"
+                                               value="{{ key }}" {{ key  == fuenteFinanciera? 'checked':'' }}
+                                        >
+                                        <span class="form-radio-sign">{{ value }}</span>
+                                    </label>
+                                {% endfor %}
+                                <small class="errorLabelContainer form-text text-muted text-danger">
+                                    {% if flash.has('errors.fuenteFinanciera') %}
+                                        <span class="has-error">{{ flash.get('errors.fuenteFinanciera') }} </span>
+                                    {% endif %}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group {{ flash.has('errors.codigoPresupuestario')? 'has-error':'' }}">
+                            <label>Código presupuestario </label>
+                            <input type="text"
+                                   placeholder=" - {{ 'Optional'|trans }} -"
+                                   name="codigoPresupuestario"
+                                   value="{{ codigoPresupuestario }}"
+                                   class="form-control"
+                            >
+                            <small class="errorLabelContainer form-text text-muted text-danger">
+                                <span class="has-error">{{ flash.has('errors.codigoPresupuestario') }} </span>
+                            </small>
+                        </div>
+
+                        <div class="form-group {{ flash.has('errors.expedientePrincipal')? 'has-error':'' }}">
+                            <label>Expediente principal</label>
+                            <input type="text"
+                                   placeholder=" - {{ 'Optional'|trans }} -"
+                                   name="expedientePrincipal"
+                                   value="{{ expedientePrincipal }}"
+                                   class="form-control"
+                            >
+                            <small class="errorLabelContainer form-text text-muted text-danger">
+                                <span class="has-error">{{ flash.has('errors.expedientePrincipal') }} </span>
+                            </small>
+                        </div>
+
+                        <div class="form-group {{ flash.has('errors.montoObra')? 'has-error':'' }}">
+                            <label>Monto obra</label>
+                            <input type="number"
+                                   placeholder=" - {{ 'Optional'|trans }} -"
+                                   name="montoObra"
+                                   value="{{ montoObra }}"
+                                   maxlength="12"
+                                   class="form-control"
+                            >
+                            <small class="errorLabelContainer form-text text-muted text-danger">
+                                <span class="has-error">{{ flash.has('errors.montoObra') }} </span>
+                            </small>
+                        </div>
+
+                        <div class="form-group {{ flash.has('errors.presupuestoNecesario')? 'has-error':'' }}">
+                            <label>Presupuesto necesario</label>
+                            <input type="number"
+                                   placeholder=" - {{ 'Optional'|trans }} -"
+                                   name="presupuestoNecesario"
+                                   value="{{ presupuestoNecesario }}"
+                                   class="form-control"
+                            >
+                            <small class="errorLabelContainer form-text text-muted text-danger">
+                                <span class="has-error">{{ flash.has('errors.presupuestoNecesario') }} </span>
+                            </small>
+                        </div>
+
+                        <div class="form-group {{ flash.has('errors.presupuestoDisponibleRegularizado')? 'has-error':'' }}">
+                            <label>Presupuesto disponible regularizado</label>
+                            <input type="number"
+                                   placeholder=" - {{ 'Optional'|trans }} -"
+                                   name="presupuestoDisponibleRegularizado"
+                                   value="{{ presupuestoDisponibleRegularizado }}"
+                                   class="form-control"
+                            >
+                            <small class="errorLabelContainer form-text text-muted text-danger">
+                                <span class="has-error">{{ flash.has('errors.presupuestoDisponibleRegularizado') }} </span>
+                            </small>
+                        </div>
+
+                        <div class="form-group {% if flash.has('errors.estadoPresupuestario') %} has-error {% endif %}">
+                            <div class="form-check">
+                                <label>Fuente financiera</label><br>
+                                {% for key,value  in estado_presupuestario_choices %}
+                                    <label class="form-radio-label">
+                                        <input class="form-radio-input"
+                                               type="radio"
+                                               name="estadoPresupuestario"
+                                               value="{{ key }}" {{ key  == estadoPresupuestario? 'checked':'' }}
+                                        >
+                                        <span class="form-radio-sign">{{ value }}</span>
+                                    </label>
+                                    <br>
+                                {% endfor %}
+                                <small class="errorLabelContainer form-text text-muted text-danger">
+                                    {% if flash.has('errors.estadoPresupuestario') %}
+                                        <span class="has-error">{{ flash.get('errors.estadoPresupuestario') }} </span>
+                                    {% endif %}
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group {% if flash.has('errors.estadoObra') %} has-error {% endif %}">
+                            <div class="form-check">
+                                <label>Estado obra</label><br>
+                                {% for key,value  in estado_obra_choices %}
+                                    <label class="form-radio-label">
+                                        <input class="form-radio-input"
+                                               type="radio"
+                                               name="estadoObra"
+                                               value="{{ key }}" {{ key  == estadoObra? 'checked':'' }}
+                                        >
+                                        <span class="form-radio-sign">{{ value }}</span>
+                                    </label>
+                                {% endfor %}
+                                <small class="errorLabelContainer form-text text-muted text-danger">
+                                    {% if flash.has('errors.estadoObra') %}
+                                        <span class="has-error">{{ flash.get('errors.estadoObra') }} </span>
+                                    {% endif %}
+                                </small>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group {{ flash.has('errors.estadoTramite')? 'has-error':'' }}">
+                            <label>Estado tramite</label>
+                            <input type="text"
+                                   placeholder=" - {{ 'Optional'|trans }} -"
+                                   name="estadoTramite"
+                                   value="{{ estadoTramite }}"
+                                   maxlength="100"
+                                   class="form-control"
+                            >
+                            <small class="errorLabelContainer form-text text-muted text-danger">
+                                <span class="has-error">{{ flash.has('errors.estadoTramite') }} </span>
+                            </small>
+                        </div>
+
+                    </div>
+
+                    <div class="card-action">
+                        <button class="btn btn-success btn-finish col-12 col-sm-4 col-md-2 col-lg-2"
+                                type="submit"
+                                id="submitBtn"
+                        >
+                                <span class="btn-label">
+                                    <i class="fas fa-save"></i>
+                                </span>
+                            {{ submit_button_label|trans }}
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/blog/_shared/form/click.submit.button.on.enter.key.press.in.keyboard.js') }}"></script>
+{% endblock %}
