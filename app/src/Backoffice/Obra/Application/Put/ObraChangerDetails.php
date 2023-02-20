@@ -8,7 +8,7 @@ use App\Backoffice\Obra\Application\Get\Single\ObraFinder;
 use App\Backoffice\Obra\Domain\ObraRepository;
 
 
-final class CertificacionObraChangerDetails
+final class ObraChangerDetails
 {
     private ObraRepository                   $repository;
     private ObraFinder                       $finder;

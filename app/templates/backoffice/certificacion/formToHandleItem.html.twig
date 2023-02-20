@@ -1,0 +1,163 @@
+{% extends 'backoffice/_shared/formToHandleItem.base.html.twig' %}
+{% block form %}
+
+    <form action="{{ path(form_action_attribute) }}" method="post" id="form" novalidate="novalidate">
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-lg-12">
+
+                    <input type="hidden" name="id" value="{{ id }}">
+
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token(id) }}">
+
+                    <div class="form-group {{ flash.has('errors.numeroCertificado')? 'has-error':'' }}">
+                        <label>Número</label>
+                        <input type="number"
+                               placeholder=" - {{ 'Optional'|trans }} -"
+                               name="numeroCertificado"
+                               value="{{ numeroCertificado }}"
+                               maxlength="100"
+                               class="form-control"
+                               autofocus
+                        />
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.numeroCertificado') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.fecha')? 'has-error':'' }}">
+                        <label>Fecha</label>
+                        <input type="date"
+                               name="fecha"
+                               value="{{ fecha }}"
+                               class="form-control"
+                        />
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.fecha') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.expedienteCertificado')? 'has-error':'' }}">
+                        <label>Expediente certificado</label>
+                        <input type="text"
+                               name="expedienteCertificado"
+                               value="{{ expedienteCertificado }}"
+                               class="form-control"
+                        />
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.expedienteCertificado') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.porcentajeAvanceObra')? 'has-error':'' }}">
+                        <label>Porcentaje avance obra</label>
+                        <input type="number"
+                               required="required"
+                               min="0"
+                               max="100"
+                               name="porcentajeAvanceObra"
+                               value="{{ porcentajeAvanceObra }}"
+                               class="form-control"
+                        />
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.porcentajeAvanceObra') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.montoPagado')? 'has-error':'' }}">
+                        <label>Monto pagado</label>
+                        <input type="number"
+                               name="montoPagado"
+                               value="{{ montoPagado }}"
+                               class="form-control"
+                        />
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.montoPagado') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {% if flash.has('errors.ubicacion') %} has-error {% endif %}">
+                        <div class="form-check" id="roles">
+                            <label>Ubicación</label><br>
+                            {% for key,value  in ubicaciones_choices %}
+                                <label class="form-radio-label">
+                                    <input class="form-radio-input"
+                                           type="radio"
+                                           name="ubicacion"
+                                           value="{{ key }}" {{ key  == ubicacion? 'checked':'' }}
+                                    >
+                                    <span class="form-radio-sign">{{ value }}</span>
+                                </label>
+                            {% endfor %}
+                            <small class="errorLabelContainer form-text text-muted text-danger">
+                                {% if flash.has('errors.ubicacion') %}
+                                    <span class="has-error">{{ flash.get('errors.ubicacion') }} </span>
+                                {% endif %}
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.numeroSidif')? 'has-error':'' }}">
+                        <label>Sidif</label>
+                        <input type="text"
+                               name="numeroSidif"
+                               value="{{ numeroSidif }}"
+                               class="form-control"
+                        />
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.numeroSidif') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.fechaInicioPago')? 'has-error':'' }}">
+                        <label>Fecha inicio pago</label>
+                        <input type="date"
+                               name="fechaInicioPago"
+                               value="{{ fechaInicioPago }}"
+                               class="form-control"
+                        />
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.fechaInicioPago') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="form-group {{ flash.has('errors.fechaFinPago')? 'has-error':'' }}">
+                        <label>Fecha fin pago</label>
+                        <input type="date"
+                               name="fechaFinPago"
+                               value="{{ fechaFinPago }}"
+                               class="form-control"
+                        />
+                        <small class="errorLabelContainer form-text text-muted text-danger">
+                            <span class="has-error">{{ flash.has('errors.fechaFinPago') }} </span>
+                        </small>
+                    </div>
+
+                    <div class="card-action">
+                        <button class="btn btn-success btn-finish col-12 col-sm-4 col-md-2 col-lg-2"
+                                type="submit"
+                                id="submitBtn"
+                        >
+                                <span class="btn-label">
+                                    <i class="fas fa-save"></i>
+                                </span>
+                            {{ submit_button_label|trans }}
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/blog/_shared/form/click.submit.button.on.enter.key.press.in.keyboard.js') }}"></script>
+{% endblock %}

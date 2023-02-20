@@ -33,6 +33,14 @@ doctrine:
         alias: App
 
 
+      App\Backoffice\Certificacion:
+        is_bundle: false
+        type: xml
+        dir: '%kernel.project_dir%/src/Backoffice/Certificacion/Infrastructure/Persistence/Doctrine'
+        prefix: 'App\Backoffice\Certificacion\Domain'
+        alias: App
+
+
       App\Backoffice\Authentication\ResetPasswordRequest:
         is_bundle: false
         type: xml

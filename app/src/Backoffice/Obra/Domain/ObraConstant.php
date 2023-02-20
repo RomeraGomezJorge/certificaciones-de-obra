@@ -48,11 +48,4 @@ class ObraConstant
         self::ESTADO_OBRA_SIN_DEFINIR  => 'Sin definir',
     ];
 
-    const UBICACION_SIN_DEFINIR = 'SNDE';
-    const UBICACION_PAGADO      = 'PAGA';
-
-    const UBICACIONES_DESCRIPTION = [
-        self::UBICACION_SIN_DEFINIR => 'Sin definir',
-        self::UBICACION_PAGADO      => 'Pagado',
-    ];
 }

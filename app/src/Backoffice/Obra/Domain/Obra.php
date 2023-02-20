@@ -4,22 +4,30 @@ declare(strict_types=1);
 
 namespace App\Backoffice\Obra\Domain;
 
+use App\Backoffice\Certificacion\Domain\Certificacion;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class Obra
 {
-    private string      $id;
-    private string      $nombreObra;
-    private string      $fuenteFinanciera;
-    private string      $codigoPresupuestario;
-    private string      $expedientePrincipal;
-    private float       $montoObra;
-    private float       $presupuestoNecesario;
-    private float       $presupuestoDisponibleRegularizado;
-    private string      $estadoPresupuestario;
-    private string      $estadoObra;
-    private string      $estadoTramite;
-    private Datetime    $createAt;
+    private string                    $id;
+    private ?string                   $nombreObra;
+    private ?string                   $fuenteFinanciera;
+    private ?string                   $codigoPresupuestario;
+    private ?string                   $expedientePrincipal;
+    private ?float                    $montoObra;
+    private ?float                    $presupuestoNecesario;
+    private ?float                    $presupuestoDisponibleRegularizado;
+    private ?string                   $estadoPresupuestario;
+    private ?string                   $estadoObra;
+    private ?string                   $estadoTramite;
+    private ArrayCollection           $certificaciones;
+    private Datetime                  $createAt;
+
+    public function __construct()
+    {
+        $this->certificaciones = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -38,163 +46,179 @@ class Obra
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNombreObra(): string
+    public function getNombreObra(): ?string
     {
         return $this->nombreObra;
     }
 
     /**
-     * @param string $nombreObra
+     * @param null|string $nombreObra
      */
-    public function setNombreObra(string $nombreObra): void
+    public function setNombreObra(?string $nombreObra): void
     {
         $this->nombreObra = $nombreObra;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFuenteFinanciera(): string
+    public function getFuenteFinanciera(): ?string
     {
         return $this->fuenteFinanciera;
     }
 
     /**
-     * @param string $fuenteFinanciera
+     * @param null|string $fuenteFinanciera
      */
-    public function setFuenteFinanciera(string $fuenteFinanciera): void
+    public function setFuenteFinanciera(?string $fuenteFinanciera): void
     {
         $this->fuenteFinanciera = $fuenteFinanciera;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCodigoPresupuestario(): string
+    public function getCodigoPresupuestario(): ?string
     {
         return $this->codigoPresupuestario;
     }
 
     /**
-     * @param string $codigoPresupuestario
+     * @param null|string $codigoPresupuestario
      */
-    public function setCodigoPresupuestario(string $codigoPresupuestario): void
+    public function setCodigoPresupuestario(?string $codigoPresupuestario): void
     {
         $this->codigoPresupuestario = $codigoPresupuestario;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getExpedientePrincipal(): string
+    public function getExpedientePrincipal(): ?string
     {
         return $this->expedientePrincipal;
     }
 
     /**
-     * @param string $expedientePrincipal
+     * @param null|string $expedientePrincipal
      */
-    public function setExpedientePrincipal(string $expedientePrincipal): void
+    public function setExpedientePrincipal(?string $expedientePrincipal): void
     {
         $this->expedientePrincipal = $expedientePrincipal;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getMontoObra(): float
+    public function getMontoObra(): ?float
     {
         return $this->montoObra;
     }
 
     /**
-     * @param float $montoObra
+     * @param null|float $montoObra
      */
-    public function setMontoObra(float $montoObra): void
+    public function setMontoObra(?float $montoObra): void
     {
         $this->montoObra = $montoObra;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getPresupuestoNecesario(): float
+    public function getPresupuestoNecesario(): ?float
     {
         return $this->presupuestoNecesario;
     }
 
     /**
-     * @param float $presupuestoNecesario
+     * @param null|float $presupuestoNecesario
      */
-    public function setPresupuestoNecesario(float $presupuestoNecesario): void
+    public function setPresupuestoNecesario(?float $presupuestoNecesario): void
     {
         $this->presupuestoNecesario = $presupuestoNecesario;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getPresupuestoDisponibleRegularizado(): float
+    public function getPresupuestoDisponibleRegularizado(): ?float
     {
         return $this->presupuestoDisponibleRegularizado;
     }
 
     /**
-     * @param float $presupuestoDisponibleRegularizado
+     * @param null|float $presupuestoDisponibleRegularizado
      */
-    public function setPresupuestoDisponibleRegularizado(float $presupuestoDisponibleRegularizado): void
+    public function setPresupuestoDisponibleRegularizado(?float $presupuestoDisponibleRegularizado): void
     {
         $this->presupuestoDisponibleRegularizado = $presupuestoDisponibleRegularizado;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEstadoPresupuestario(): string
+    public function getEstadoPresupuestario(): ?string
     {
         return $this->estadoPresupuestario;
     }
 
     /**
-     * @param string $estadoPresupuestario
+     * @param null|string $estadoPresupuestario
      */
-    public function setEstadoPresupuestario(string $estadoPresupuestario): void
+    public function setEstadoPresupuestario(?string $estadoPresupuestario): void
     {
         $this->estadoPresupuestario = $estadoPresupuestario;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEstadoObra(): string
+    public function getEstadoObra(): ?string
     {
         return $this->estadoObra;
     }
 
     /**
-     * @param string $estadoObra
+     * @param null|string $estadoObra
      */
-    public function setEstadoObra(string $estadoObra): void
+    public function setEstadoObra(?string $estadoObra): void
     {
         $this->estadoObra = $estadoObra;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEstadoTramite(): string
+    public function getEstadoTramite(): ?string
     {
         return $this->estadoTramite;
     }
 
     /**
-     * @param string $estadoTramite
+     * @param null|string $estadoTramite
      */
-    public function setEstadoTramite(string $estadoTramite): void
+    public function setEstadoTramite(?string $estadoTramite): void
     {
         $this->estadoTramite = $estadoTramite;
+    }
+
+    /**
+     * @param ArrayCollection $certificaciones
+     */
+    public function setCertificaciones(ArrayCollection $certificaciones): void
+    {
+        $this->certificaciones = $certificaciones;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCertificaciones(): ArrayCollection
+    {
+        return $this->certificaciones;
     }
 
     /**

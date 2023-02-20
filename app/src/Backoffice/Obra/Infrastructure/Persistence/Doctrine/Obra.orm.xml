@@ -15,5 +15,17 @@
         <field name="estadoObra"                        type="string"   nullable="true"     column="estado_obra"                            length="4" />
         <field name="estadoTramite"                     type="string"   nullable="true"     column="estado_tramite"                         length="255" />
         <field name="createAt"                          type="datetime" nullable="false"    column="create_at" />
+        <one-to-many
+                field="certificaciones"
+                target-entity="App\Backoffice\Certifiacion\Domain\Certifiacion"
+                mapped-by="obra"
+        >
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+            <order-by>
+                <order-by-field name="numeroCertificado"/>
+            </order-by>
+        </one-to-many>
     </entity>
 </doctrine-mapping>
