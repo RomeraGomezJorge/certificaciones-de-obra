@@ -24,6 +24,10 @@
             </cascade>
             <join-column name="obra_id" referenced-column-name="id" />
         </many-to-one>
+        <unique-constraints>
+            <unique-constraint columns="expediente_certificado" name="search_idx" />
+            <unique-constraint columns="numero_sidif"           name="numero_sidif_idx" />
+        </unique-constraints>
     </entity>
 
 

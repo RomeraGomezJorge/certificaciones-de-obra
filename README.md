@@ -1,28 +1,46 @@
 # Instalacion
 
-Luego de clonar el repositorio
+1 ) Clonar el repositorio
 
-ubicarse en la carpeta donde descargo el codigo
+    git clone https://github.com/RomeraGomezJorge/certificaciones-de-obra.git
 
-y ejecutar
+2 ) Ubicarse en la carpeta (certificaciones-de-obra) donde descargo el codigo
 
-sudo chmod -R 777 app/var ( para darle todos los permisos a la cache y los logs)
+    cd certificaciones-de-obra
 
-luego por unica vez docker-compose -up
+3 ) Una vez dentro de la carpeta certificaciones-de-obra ejecutar lo 
+   siguiente  para darle todos los permisos a la cache y los logs
 
-cuando termine el proceso en otra terminal ejecutar
+    sudo chmod -R 777 app/var
 
-docker exec -ti php-fpm /bin/bash
-
-para ingresar al contenedor de php
-
-una vez dentro ejecutar
+4 ) Luego por unica vez ejecutar para descargar los imagenes  y generar
+   los containers  de docker (Si tira error ejecutar como admin con sudo)
  
-composer install
+      docker-compose up
 
-Para ingresar colocar en el navegador localhost
+5 ) Cuando termine el proceso ( docker-compose up ) abrir otra terminal 
+   ubicarse en la carpeta certificaciones-de-obra y ejecutar lo siguiente
+   para comprobar que todos los contenedores estan corriendo con estado Up y ninguno fallo
+   
+    docker-compose ps
+   
+6 ) Ingresar al contenedor de php
 
-usuario : user
+    docker exec -ti php-fpm /bin/bash
 
-pass : User1234
+7 ) Una vez dentro ejecutar lo siguiente para instalar todas las 
+   dependencias del proyecto
+
+    composer install
+    
+8 ) Sino hubo errores instalando las dependecias en el navegador
+   ingresar la siguiente url
+    
+    http://localhost/
+
+9 ) Al ingresar la url deberia aparecer la pantalla de 
+   login, utilizar estos datos
+   
+    usuario : user
+    pass    : User1234
 
