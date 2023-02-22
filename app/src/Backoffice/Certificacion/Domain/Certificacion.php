@@ -214,5 +214,12 @@ class Certificacion
         $this->createAt = $createAt;
     }
 
+    /**
+     * @return string
+     */
+    public function getUbicacionDespription():string
+    {
+        return CertificacionConstant::UBICACIONES_DESCRIPTION[$this->ubicacion];
+    }
 
 }

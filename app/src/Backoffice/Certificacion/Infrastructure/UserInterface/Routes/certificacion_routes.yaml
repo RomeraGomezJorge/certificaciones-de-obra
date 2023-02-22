@@ -1,10 +1,10 @@
 certificacion_list:
-  path: /list/{pageLabel}-{page}/{orderLabel}-{order}-{orderBy}/{limitLabel}-{limit}/{filters}
+  path: /list/{obraId}/{pageLabel}-{page}/{orderLabel}-{order}-{orderBy}/{limitLabel}-{limit}/{filters}
   defaults: { _controller: App\Backoffice\Certificacion\Infrastructure\UserInterface\Web\CertificacionGetController, pageLabel: 'page' , page: 1 , orderLabel: 'order' , order: 'createAt' , orderBy: 'desc' , limitLabel: 'rows_per_page' , limit: 10 , filters: null }
   methods:  [GET,POST]
 
 certificacion_add:
-  path: /create
+  path: /create/{obraId}
   defaults: { _controller: App\Backoffice\Certificacion\Infrastructure\UserInterface\Web\CertificacionAddController}
   methods:  [GET]
 
@@ -14,7 +14,7 @@ certificacion_create:
   methods:  [POST]
 
 certificacion_edit:
-  path: /edit/{id}
+  path: /edit/{id}/{obraId}
   defaults: { _controller: App\Backoffice\Certificacion\Infrastructure\UserInterface\Web\CertificacionEditController}
   methods:  [GET]
 

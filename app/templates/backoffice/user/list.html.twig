@@ -9,27 +9,27 @@
         <thead>
         <tr role="row">
             <th class="sorting_{{ toggleSort }} d-none d-sm-table-cell">
-                <a href="{{ path(list_path) }}/page-1/order-username-{{ toggleSort }}/rows_per_page-{{ limit }}/{{ filters }}">
+                <a href="{{ list_url }}/page-1/order-username-{{ toggleSort }}/rows_per_page-{{ limit }}/{{ filters }}">
                     {{ 'Username'|trans }}
                 </a>
             </th>
             <th class="sorting_{{ toggleSort }} d-none d-sm-table-cell">
-                <a href="{{ path(list_path) }}/page-1/order-surname-{{ toggleSort }}/rows_per_page-{{ limit }}/{{ filters }}">
+                <a href="{{ list_url }}/page-1/order-surname-{{ toggleSort }}/rows_per_page-{{ limit }}/{{ filters }}">
                     {{ 'Surname and Name'|trans }}
                 </a>
             </th>
             <th class="sorting_{{ toggleSort }} d-none d-sm-table-cell">
-                <a href="{{ path(list_path) }}/page-1/order-email-{{ toggleSort }}/rows_per_page-{{ limit }}/{{ filters }}">
+                <a href="{{ list_url }}/page-1/order-email-{{ toggleSort }}/rows_per_page-{{ limit }}/{{ filters }}">
                     {{ 'Email'|trans }}
                 </a>
             </th>
             <th class="sorting_{{ toggleSort }} d-none d-sm-table-cell">
-                <a href="{{ path(list_path) }}/page-1/order-role-{{ toggleSort }}/rows_per_page-{{ limit }}/{{ filters }}">
+                <a href="{{ list_url }}/page-1/order-role-{{ toggleSort }}/rows_per_page-{{ limit }}/{{ filters }}">
                     Rol
                 </a>
             </th>
             <th class="sorting_{{ toggleSort }} d-none d-sm-table-cell">
-                <a href="{{ path(list_path) }}/page-1/order-isActive-{{ toggleSort }}/rows_per_page-{{ limit }}/{{ filters }}">
+                <a href="{{ list_url }}/page-1/order-isActive-{{ toggleSort }}/rows_per_page-{{ limit }}/{{ filters }}">
                     {{ 'Status'|trans }}
                 </a>
             </th>
@@ -47,8 +47,8 @@
                     data-toggle="modal"
                     data-target="#mobile-actions-modal"
                     data-edit_path="{{ path(edit_path, {'id': user.id}) }}"
-                    data-delete_path="{{ path(delete_path) }}"
-                    data-url_delete_confirmation_modal="{{ path(delete_confirmation_modal_path) }}"
+                    data-delete_path="{{ delete_url}}"
+                    data-url_delete_confirmation_modal="{{ delete_confirmation_modal_url}}"
                     data-css_selector_to_handle_tr_style_that_contains_items_to_delete="#css-selector-for-tr-that_contains-items-to-delete-{{ user.id }}"
                     data-id_to_delete="{{ user.id }}"
                     data-message_to_delete_confirmation='{{ 'The user %surname%, %name%".'|trans({'%surname%':user.surname,'%name%':user.name}) }}'
@@ -89,8 +89,8 @@
                                 class=" btn-link btn-danger shown-delete-confirmation-modal ml-4"
                                 data-toggle="modal"
                                 data-target="#delete-confirmation-modal"
-                                data-delete_path="{{ path(delete_path) }}"
-                                data-url_delete_confirmation_modal="{{ path(delete_confirmation_modal_path) }}"
+                                data-delete_path="{{ delete_url}}"
+                                data-url_delete_confirmation_modal="{{ delete_confirmation_modal_url}}"
                                 data-css_selector_to_handle_tr_style_that_contains_items_to_delete="#css-selector-for-tr-that_contains-items-to-delete-{{ user.id }}"
                                 data-id_to_delete="{{ user.id }}"
                                 data-message_to_delete_confirmation='{{ 'The user %surname%, %name%".'|trans({'%surname%':user.surname,'%name%':user.name}) }}'

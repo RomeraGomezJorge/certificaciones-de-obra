@@ -15,10 +15,19 @@ class CertificacionPutController extends WebController
 {
     private CertificacionChangerDetails      $updater;
     private ValidationRulesToCreateAndUpdate $validationRules;
+    private                                  $urlParameters;
+
+    public function __construct(CertificacionChangerDetails $updater, ValidationRulesToCreateAndUpdate $validationRules)
+    {
+        $this->updater         = $updater;
+        $this->validationRules = $validationRules;
+    }
 
     public function __invoke(Request $request): Response
     {
-        $isCsrfTokenValid = $this->isCsrfTokenValid($request->get('id'), $request->get('csrf_token'));
+        $this->urlParameters = ['obraId' => $request->get('obraId')];
+        $id                  = $request->get('id');
+        $isCsrfTokenValid    = $this->isCsrfTokenValid($id, $request->get('csrf_token'));
 
         if (!$isCsrfTokenValid) {
             return $this->redirectWithMessage('error_page', MessageConstant::INVALID_TOKEN_CSFR_MESSAGE);
@@ -27,7 +36,7 @@ class CertificacionPutController extends WebController
         $validationErrors = $this->validationRules->verify($request);
 
         return $validationErrors->count() !== 0
-            ? $this->redirectWithErrors(TwigTemplateConstants::EDIT_PATH, $validationErrors, $request)
+            ? $this->redirectWithErrors(TwigTemplateConstants::LIST_PATH, $validationErrors, $request, $this->urlParameters)
             : $this->update($request);
     }
 
@@ -43,12 +52,15 @@ class CertificacionPutController extends WebController
             $request->get('ubicacion'),
             $request->get('numeroSidif'),
             $request->get('fechaInicioPago'),
-            $request->get('fechaFinPago')
+            $request->get('fechaFinPago'),
+            $request->get('obraId'),
+
         );
 
         return $this->redirectWithMessage(
             TwigTemplateConstants::LIST_PATH,
-            MessageConstant::SUCCESS_MESSAGE_TO_UPDATE
+            MessageConstant::SUCCESS_MESSAGE_TO_UPDATE,
+            $this->urlParameters
         );
     }
 }

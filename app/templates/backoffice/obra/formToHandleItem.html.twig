@@ -1,7 +1,7 @@
 {% extends 'backoffice/_shared/formToHandleItem.base.html.twig' %}
 {% block form %}
 
-    <form action="{{ path(form_action_attribute) }}" method="post" id="form" novalidate="novalidate">
+    <form action="{{ form_action_attribute_url}}" method="post" id="form" novalidate="novalidate">
 
         <div class="card-body">
 
@@ -119,7 +119,7 @@
 
                         <div class="form-group {% if flash.has('errors.estadoPresupuestario') %} has-error {% endif %}">
                             <div class="form-check">
-                                <label>Fuente financiera</label><br>
+                                <label>Estado presupuestario</label><br>
                                 {% for key,value  in estado_presupuestario_choices %}
                                     <label class="form-radio-label">
                                         <input class="form-radio-input"

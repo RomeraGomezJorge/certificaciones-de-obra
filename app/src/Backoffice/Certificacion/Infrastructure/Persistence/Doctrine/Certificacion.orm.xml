@@ -8,13 +8,17 @@
         <field name="fecha"                     type="date"         nullable="true"     column="fecha" />
         <field name="expedienteCertificado"     type="string"       nullable="true"     column="expediente_certificado"/>
         <field name="porcentajeAvanceObra"      type="integer"      nullable="true"     column="porcentaje_avance_obra" length="3"/>
-        <field name="montoPagado"               type="decimal"      nullable="true"     column="monto_pagado" scale="12" precision="2"/>
+        <field name="montoPagado"               type="decimal"      nullable="true"     column="monto_pagado" scale="2" precision="12"/>
         <field name="ubicacion"                 type="string"       nullable="true"     column="ubicacion"/>
         <field name="numeroSidif"               type="string"       nullable="true"     column="numero_sidif"/>
         <field name="fechaInicioPago"           type="date"         nullable="true"     column="fecha_inicio_pago" />
         <field name="fechaFinPago"              type="date"         nullable="true"     column="fecha_fin_pago" />
         <field name="createAt"                  type="datetime"     nullable="false"    column="create_at"/>
-        <many-to-one field="obra" target-entity="App\Backoffice\Obra\Domain\Obra" inversed-by="certificaciones">
+        <many-to-one
+                field="obra"
+                target-entity="App\Backoffice\Obra\Domain\Obra"
+                inversed-by="certificaciones"
+        >
             <cascade>
                 <cascade-persist/>
             </cascade>

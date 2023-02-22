@@ -20,3 +20,9 @@ una vez dentro ejecutar
  
 composer install
 
+Para ingresar colocar en el navegador localhost
+
+usuario : user
+
+pass : User1234
+

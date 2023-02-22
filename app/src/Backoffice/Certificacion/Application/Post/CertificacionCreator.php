@@ -6,6 +6,7 @@ namespace App\Backoffice\Certificacion\Application\Post;
 
 use App\Backoffice\Certificacion\Domain\Certificacion;
 use App\Backoffice\Certificacion\Domain\CertificacionRepository;
+use App\Backoffice\Obra\Application\Get\Single\ObraFinder;
 use App\Shared\Domain\ValueObject\Uuid;
 use DateTime;
 
@@ -13,12 +14,18 @@ use DateTime;
 final class CertificacionCreator
 {
     private CertificacionRepository $repository;
+    /**
+     * @var ObraFinder
+     */
+    private ObraFinder $obraFinder;
 
     public function __construct(
-        CertificacionRepository $repository
+        CertificacionRepository $repository,
+        ObraFinder $obraFinder
     )
     {
         $this->repository = $repository;
+        $this->obraFinder = $obraFinder;
     }
 
     public function __invoke(
@@ -31,15 +38,18 @@ final class CertificacionCreator
         $ubicacion,
         $numeroSidif,
         $fechaInicioPago,
-        $fechaFinPago
+        $fechaFinPago,
+        $obraId
     )
     {
+        $obra            = $this->obraFinder->__invoke($obraId);
         $certificacion   = new Certificacion();
         $id              = new Uuid($id);
         $createAt        = new DateTime();
         $fecha           = new \DateTime($fecha);
         $fechaInicioPago = new \DateTime($fechaInicioPago);
         $fechaFinPago    = new \DateTime($fechaFinPago);
+
 
         $certificacion->setId($id->value());
         $certificacion->setNumeroCertificado((int)$numeroCertificado);
@@ -51,6 +61,7 @@ final class CertificacionCreator
         $certificacion->setNumeroSidif($numeroSidif);
         $certificacion->setFechaInicioPago($fechaInicioPago);
         $certificacion->setFechaFinPago($fechaFinPago);
+        $certificacion->setObra($obra);
         $certificacion->setCreateAt($createAt);
 
         $this->repository->save($certificacion);

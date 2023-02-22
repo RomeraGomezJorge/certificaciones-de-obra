@@ -23,7 +23,7 @@ final class ValidationRulesToCreateAndUpdate
         $constraint = new Assert\Collection(
             [
                 'id'                                => [new Assert\Uuid()],
-                'nombreObra'                        => [new Assert\Optional()],
+                'nombreObra'                        => [new Assert\NotBlank()],
                 'fuenteFinanciera'                  => [new Assert\Optional(new Assert\Choice(array_keys(ObraConstant::FUENTES_FINANCIERAS_DESCRIPTION)))],
                 'codigoPresupuestario'              => [new Assert\Optional()],
                 'expedientePrincipal'               => [new Assert\Optional()],

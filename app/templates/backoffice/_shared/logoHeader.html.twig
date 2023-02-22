@@ -47,7 +47,7 @@
     {# Start- On mobile view the go back icon is show in actions 'list' 'edit' o 'create'#}
     {% if 'create' in  currentUrl or 'edit' in  currentUrl %}
         <div id="back-mobile">
-            <a href="{{ path(list_path) }}" class="d-block d-sm-none text-white">
+            <a href="{{ list_url }}" class="d-block d-sm-none text-white">
                 <i class="fas fa-chevron-left"></i>
             </a>
         </div>

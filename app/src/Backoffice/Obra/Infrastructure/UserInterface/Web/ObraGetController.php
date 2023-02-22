@@ -21,48 +21,47 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ObraGetController extends WebController
 {
-    public function __invoke(
-        Request $request,
-        ObraByCriteriaSearcher $itemsByCriteriaSearcher,
-        ObraByCriteriaCounter $counter
-    ): Response
+    private ObraByCriteriaSearcher $itemsByCriteriaSearcher;
+    private ObraByCriteriaCounter  $counter;
+    private TwigTemplateConstants  $twigTemplateConstants;
+
+    public function __construct(ObraByCriteriaSearcher $itemsByCriteriaSearcher, ObraByCriteriaCounter $counter, TwigTemplateConstants $twigTemplateConstants)
     {
-        $orderBy = $request->get('orderBy');
+        $this->itemsByCriteriaSearcher = $itemsByCriteriaSearcher;
+        $this->counter                 = $counter;
+        $this->twigTemplateConstants   = $twigTemplateConstants;
+    }
 
-        $order = $request->get('order');
-
-        $page = (int)$request->get('page');
-
-        $limit = (int)$request->get('limit');
-
-        $filters = FilterUtils::getFiltersOrEmpyArray($request->get('filters'));
-
-        $obras = $itemsByCriteriaSearcher->__invoke($filters, $order, $orderBy, $limit,
-            OffsetPaginationUtil::calculate($limit, $page));
-
-        $totalItem = $counter->__invoke($filters, $order, $orderBy, $limit,
-            OffsetPaginationUtil::calculate($limit, $page));
-
+    public function __invoke(Request $request): Response
+    {
+        $orderBy            = $request->get('orderBy');
+        $order              = $request->get('order');
+        $page               = (int)$request->get('page');
+        $limit              = (int)$request->get('limit');
+        $filters            = FilterUtils::getFiltersOrEmpyArray($request->get('filters'));
+        $offset             = OffsetPaginationUtil::calculate($limit, $page);
+        $obras              = $this->itemsByCriteriaSearcher->__invoke($filters, $order, $orderBy, $limit, $offset);
+        $totalItem          = $this->counter->__invoke($filters, $order, $orderBy, $limit, $offset);
         $totalNumberOfPages = TotalNumberOfPagesUtil::calculate($page, $limit, $totalItem);
 
-        return $this->render(TwigTemplateConstants::LIST_FILE_PATH, [
-            'page_title'                     => TwigTemplateConstants::SECTION_TITLE,
-            'list_path'                      => TwigTemplateConstants::LIST_PATH,
-            'edit_path'                      => TwigTemplateConstants::EDIT_PATH,
-            'add_path'                       => TwigTemplateConstants::ADD_PATH,
-            'delete_path'                    => TwigTemplateConstants::DELETE_PATH,
-            'delete_confirmation_modal_path' => TwigTemplateGlobalConstants::DELETE_CONFIRMATION_MODAL_PATH,
-            'orderBy'                        => $orderBy,
-            'order'                          => $order,
-            'limit'                          => $limit,
-            'filters'                        => $request->get('filters'),
-            'toggleSort'                     => SortUtils::toggle($orderBy),
-            'currentPage'                    => $page,
-            'nextPage'                       => NextPage::calculate($page, $totalNumberOfPages),
-            'previousPage'                   => PreviousPage::calculate($page),
-            'totalPage'                      => $totalNumberOfPages,
-            'totalItem'                      => $totalItem,
-            'obras'                => $obras
+        return $this->render($this->twigTemplateConstants::LIST_FILE_PATH, [
+            'page_title'                    => $this->twigTemplateConstants::SECTION_TITLE,
+            'list_url'                      => $this->twigTemplateConstants->getListUrl(),
+            'edit_path'                     => $this->twigTemplateConstants::EDIT_PATH,
+            'add_url'                       => $this->twigTemplateConstants->getAddUrl(),
+            'delete_url'                    => $this->twigTemplateConstants->getDeleteUrl(),
+            'delete_confirmation_modal_url' => $this->twigTemplateConstants->getDeleteConfirmationModalUrl(),
+            'orderBy'                       => $orderBy,
+            'order'                         => $order,
+            'limit'                         => $limit,
+            'filters'                       => $request->get('filters'),
+            'toggleSort'                    => SortUtils::toggle($orderBy),
+            'currentPage'                   => $page,
+            'nextPage'                      => NextPage::calculate($page, $totalNumberOfPages),
+            'previousPage'                  => PreviousPage::calculate($page),
+            'totalPage'                     => $totalNumberOfPages,
+            'totalItem'                     => $totalItem,
+            'obras'                         => $obras
         ]);
     }
 }

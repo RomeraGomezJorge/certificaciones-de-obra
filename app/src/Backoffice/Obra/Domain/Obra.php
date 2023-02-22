@@ -7,22 +7,23 @@ namespace App\Backoffice\Obra\Domain;
 use App\Backoffice\Certificacion\Domain\Certificacion;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class Obra
 {
-    private string                    $id;
-    private ?string                   $nombreObra;
-    private ?string                   $fuenteFinanciera;
-    private ?string                   $codigoPresupuestario;
-    private ?string                   $expedientePrincipal;
-    private ?float                    $montoObra;
-    private ?float                    $presupuestoNecesario;
-    private ?float                    $presupuestoDisponibleRegularizado;
-    private ?string                   $estadoPresupuestario;
-    private ?string                   $estadoObra;
-    private ?string                   $estadoTramite;
-    private ArrayCollection           $certificaciones;
-    private Datetime                  $createAt;
+    private string                     $id;
+    private ?string                    $nombreObra;
+    private ?string                    $fuenteFinanciera;
+    private ?string                    $codigoPresupuestario;
+    private ?string                    $expedientePrincipal;
+    private ?float                     $montoObra;
+    private ?float                     $presupuestoNecesario;
+    private ?float                     $presupuestoDisponibleRegularizado;
+    private ?string                    $estadoPresupuestario;
+    private ?string                    $estadoObra;
+    private ?string                    $estadoTramite;
+    private ?Collection                $certificaciones;
+    private Datetime                   $createAt;
 
     public function __construct()
     {
@@ -205,21 +206,22 @@ class Obra
         $this->estadoTramite = $estadoTramite;
     }
 
-    /**
-     * @param ArrayCollection $certificaciones
-     */
-    public function setCertificaciones(ArrayCollection $certificaciones): void
-    {
-        $this->certificaciones = $certificaciones;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getCertificaciones(): ArrayCollection
-    {
-        return $this->certificaciones;
-    }
+//    /**
+//     * @param null|ArrayCollection $certificaciones
+//     */
+//    public function setCertificaciones(?ArrayCollection $certificaciones): void
+//    {
+//        $this->certificaciones = $certificaciones;
+//    }
+//
+//
+//    /**
+//     * @return null|ArrayCollection
+//     */
+//    public function getCertificaciones(): ?ArrayCollection
+//    {
+//        return $this->certificaciones;
+//    }
 
     /**
      * @return DateTime

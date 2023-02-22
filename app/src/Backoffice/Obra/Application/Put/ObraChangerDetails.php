@@ -40,9 +40,9 @@ final class ObraChangerDetails
         $obra->setFuenteFinanciera($fuenteFinanciera);
         $obra->setCodigoPresupuestario($codigoPresupuestario);
         $obra->setExpedientePrincipal($expedientePrincipal);
-        $obra->setMontoObra($montoObra);
-        $obra->setPresupuestoNecesario($presupuestoNecesario);
-        $obra->setPresupuestoDisponibleRegularizado($presupuestoDisponibleRegularizado);
+        $obra->setMontoObra((float)$montoObra);
+        $obra->setPresupuestoNecesario((float)$presupuestoNecesario);
+        $obra->setPresupuestoDisponibleRegularizado((float)$presupuestoDisponibleRegularizado);
         $obra->setEstadoPresupuestario($estadoPresupuestario);
         $obra->setEstadoObra($estadoObra);
         $obra->setEstadoTramite($estadoTramite);

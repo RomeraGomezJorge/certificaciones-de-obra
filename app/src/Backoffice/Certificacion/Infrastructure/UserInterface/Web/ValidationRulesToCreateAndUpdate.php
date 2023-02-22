@@ -23,6 +23,7 @@ final class ValidationRulesToCreateAndUpdate
         $constraint = new Assert\Collection(
             [
                 'id'                    => [new Assert\Uuid()],
+                'obraId'                    => [new Assert\Uuid()],
                 'numeroCertificado'     => [new Assert\Optional()],
                 'fecha'                 => [new Assert\Optional(new Assert\Date())],
                 'expedienteCertificado' => [new Assert\Optional()],

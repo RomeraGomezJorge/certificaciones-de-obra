@@ -1,4 +1,44 @@
+{% extends 'backoffice/_shared/list.base.html.twig' %}
 
+{% block title %} {{ 'List'|trans }} {{ sectionTtile }} {% endblock %}
+{% block topTitle  %}
+    <div class="mb-3"><h3><b>Obra:</b> {{ obra_nombre }}</h3></div>
+{% endblock %}
+{% block page_title %} {{ sectionTtile }} {% endblock  page_title %}
+{% block breadcrumbs %}
+    <ul class="breadcrumbs d-none d-sm-block">
+        <li class="nav-home">
+            <a href="{{ path('dashboard') }}">
+                <i class="flaticon-home"></i>
+            </a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="{{ list_obra_url }} ">Obra</a>
+        </li>
+        <li class="separator">
+            <i class="flaticon-right-arrow"></i>
+        </li>
+        <li class="nav-item">
+            <a href="#">{{  'List'|trans }}</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block goBackButton %}
+    <span class="back-button d-none d-sm-block">
+        <a class="pull-right btn black" href="{{ list_obra_url }}">
+            <small>
+                <span class="btn-label">
+                    <i class="fas fa-chevron-circle-left"></i>
+                </span>
+                {{ 'Back'|trans }}
+            </small>
+        </a>
+     </span>
+{% endblock %}
+{% block table %}
     <table id="add-row"
            class="display table table-striped table-hover dataTable"
            role="grid"
@@ -6,8 +46,23 @@
         <thead>
         <tr role="row">
             <th class="sorting_{{ toggleSort }} d-none d-sm-table-cell">
-                <a href="{{ path(list_path) }}/page-1/order-name-{{ toggleSort }}/rows_per_page-{{ limit }}/{{ filters }}">
-                    {{ 'Name'|trans }}
+                <a href="{{ list_url }}/page-1/order-expedienteCertificado-{{ toggleSort }}/rows_per_page-{{ limit }}/{{ filters }}">
+                    Expediente
+                </a>
+            </th>
+            <th class="sorting_{{ toggleSort }} d-none d-sm-table-cell">
+                <a href="{{ list_url }}/page-1/order-porcentajeAvanceObra-{{ toggleSort }}/rows_per_page-{{ limit }}/{{ filters }}">
+                    Porcentaje
+                </a>
+            </th>
+            <th class="sorting_{{ toggleSort }} d-none d-sm-table-cell">
+                <a href="{{ list_url }}/page-1/order-montoPagado-{{ toggleSort }}/rows_per_page-{{ limit }}/{{ filters }}">
+                    Monto
+                </a>
+            </th>
+            <th class="sorting_{{ toggleSort }} d-none d-sm-table-cell">
+                <a href="{{ list_url }}/page-1/order-ubicacion-{{ toggleSort }}/rows_per_page-{{ limit }}/{{ filters }}">
+                    Ubicación
                 </a>
             </th>
             <th class="d-none d-sm-table-cell" style="width: 132.8px;">
@@ -21,13 +76,12 @@
                 <td class=" d-table-cell d-sm-none cursor-pointer"
                     data-toggle="modal"
                     data-target="#mobile-actions-modal"
-                    data-edit_path="{{ path(edit_path, {'id': certificacion.id}) }}"
-                    data-delete_path="{{ path(delete_path) }}"
-                    data-url_delete_confirmation_modal="{{ path(delete_confirmation_modal_path) }}"
+                    data-edit_path="{{ path(edit_path, {'id': certificacion.id,'obraId':obra_id}) }}"
+                    data-delete_path="{{ delete_url}}"
+                    data-url_delete_confirmation_modal="{{ delete_confirmation_modal_url}}"
                     data-css_selector_to_handle_tr_style_that_contains_items_to_delete="#css-selector-for-tr-that_contains-items-to-delete-{{ certificacion.id }}"
                     data-id_to_delete="{{ certificacion.id }}"
-                    data-message_to_delete_confirmation='{{'The job designation with name "%name%".'|trans({'%name%': certificacion.expedienteCertificado}) }}'
-
+                    data-message_to_delete_confirmation='{{ 'The job designation with name "%name%".'|trans({'%name%': certificacion.expedienteCertificado}) }}'
                     data-modal_title='{{ certificacion.expedienteCertificado }}'
                 >
                     <div class="row pt-2">
@@ -36,6 +90,9 @@
                     </div>
                 </td>
                 <td class="d-none d-sm-table-cell">{{ certificacion.expedienteCertificado }}</td>
+                <td class="d-none d-sm-table-cell">{{ certificacion.porcentajeAvanceObra }}</td>
+                <td class="d-none d-sm-table-cell">{{ certificacion.montoPagado }}</td>
+                <td class="d-none d-sm-table-cell">{{ certificacion.ubicacionDespription }}</td>
                 <td class="d-none d-sm-table-cell">
                     <div class="d-block d-sm-none">
                         <button type="button" class="btn btn-link text-dark">
@@ -44,28 +101,29 @@
                     </div>
 
                     <div class="d-none d-sm-block">
-                    <span class="form-button-dots">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </span>
+                        <span class="form-button-dots">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </span>
                         <span class="form-button-action">
-                        <a href="{{ path(edit_path, {'id': certificacion.id}) }}"
-                           class="editItemLink btn btn-link btn-primary btn-lg">
-                            <i class="fa fa-edit"></i>
-                        </a>
 
-                        <button type="button"
-                                class="btn btn-link btn-danger shown-delete-confirmation-modal"
-                                data-toggle="modal"
-                                data-target="#delete-confirmation-modal"
-                                data-delete_path="{{ path(delete_path) }}"
-                                data-url_delete_confirmation_modal="{{ path(delete_confirmation_modal_path) }}"
-                                data-css_selector_to_handle_tr_style_that_contains_items_to_delete="#css-selector-for-tr-that_contains-items-to-delete-{{ certificacion.id }}"
-                                data-id_to_delete="{{ certificacion.id }}"
-                                data-message_to_delete_confirmation='{{'The job designation with name "%name%".'|trans({'%name%': certificacion.expedienteCertificado}) }}'
-                        >
-                            <i class="fa fa-times"></i>
-                        </button>
-                    </span>
+                            <a href="{{ path(edit_path, {'id': certificacion.id,'obraId':obra_id}) }}"
+                               class="editItemLink btn btn-link btn-primary btn-lg">
+                                <i class="fa fa-edit"></i>
+                            </a>
+
+                            <button type="button"
+                                    class="btn btn-link btn-danger shown-delete-confirmation-modal"
+                                    data-toggle="modal"
+                                    data-target="#delete-confirmation-modal"
+                                    data-delete_path="{{ delete_url}}"
+                                    data-url_delete_confirmation_modal="{{ delete_confirmation_modal_url}}"
+                                    data-css_selector_to_handle_tr_style_that_contains_items_to_delete="#css-selector-for-tr-that_contains-items-to-delete-{{ certificacion.id }}"
+                                    data-id_to_delete="{{ certificacion.id }}"
+                                    data-message_to_delete_confirmation='{{ 'The job designation with name "%name%".'|trans({'%name%': certificacion.expedienteCertificado}) }}'
+                            >
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </span>
                     </div>
                 </td>
             </tr>
@@ -78,21 +136,22 @@
         {% endfor %}
         </tbody>
     </table>
-
-{#{% block filterFields %}#}
-{#    <div class="form-group col-12 col-sm-4">#}
-{#        <select name="filters[0][field]" id="field" class="form-control form-control-sm w-100">#}
-{#            <option value="name" selected>{{ 'Name'|trans }}</option>#}
-{#        </select>#}
-{#    </div>#}
-{#    <div class="form-group col-12 col-sm-4">#}
-{#        <select name="filters[0][operator]" id="operator" class="form-control  form-control-sm w-100">#}
-{#            <option value="="> {{ 'equal to'|trans }} </option>#}
-{#            <option value="CONTAINS">{{ 'contains'|trans }}</option>#}
-{#            <option value="<>"> {{ 'distinct'|trans }}</option>#}
-{#        </select>#}
-{#    </div>#}
-{#    <div class="form-group col-12 col-sm-4">#}
-{#        <input name="filters[0][value]" type="text" class="form-control form-control-sm w-100" placeholder="{{ 'Value'|trans}}"...>#}
-{#    </div>#}
-{#{% endblock %}#}
+{% endblock %}
+{% block filterFields %}
+    <div class="form-group col-12 col-sm-4">
+        <select name="filters[0][field]" id="field" class="form-control form-control-sm w-100">
+            <option value="obra" selected>{{ 'Name'|trans }}</option>
+        </select>
+    </div>
+    <div class="form-group col-12 col-sm-4">
+        <select name="filters[0][operator]" id="operator" class="form-control  form-control-sm w-100">
+            <option value="="> {{ 'equal to'|trans }} </option>
+            <option value="CONTAINS">{{ 'contains'|trans }}</option>
+            <option value="<>"> {{ 'distinct'|trans }}</option>
+        </select>
+    </div>
+    <div class="form-group col-12 col-sm-4">
+        <input name="filters[0][value]" type="text" class="form-control form-control-sm w-100"
+               placeholder="{{ 'Value'|trans }}" ...>
+    </div>
+{% endblock %}

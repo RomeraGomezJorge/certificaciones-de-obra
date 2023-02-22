@@ -13,31 +13,41 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ObraDeleteController extends WebController
 {
-    public function __invoke(Request $request, ObraDeleter $deleter, ValidationRulesToDelete $rulesToDelete): JsonResponse
+
+    private ObraDeleter             $deleter;
+    private ValidationRulesToDelete $rulesToDelete;
+
+    public function __construct(ObraDeleter $deleter, ValidationRulesToDelete $rulesToDelete)
     {
-        $isCsrfTokenValid = $this->isCsrfTokenValid($request->get('id'), $request->get('csrf_token'));
+        $this->deleter       = $deleter;
+        $this->rulesToDelete = $rulesToDelete;
+    }
+
+    public function __invoke(Request $request): JsonResponse
+    {
+        $id               = $request->get('id');
+        $isCsrfTokenValid = $this->isCsrfTokenValid($id, $request->get('csrf_token'));
 
         if (!$isCsrfTokenValid) {
-            return new JsonResponse(array(
+            return new JsonResponse([
                 'status'  => 'fail_invalid_csfr_token',
                 'message' => MessageConstant::INVALID_TOKEN_CSFR_MESSAGE
-            ));
+            ]);
         }
 
-        $validationErrors = $rulesToDelete->verify($request);
+        $validationErrors = $this->rulesToDelete->verify($request);
 
         $response = $validationErrors->count() !== 0 ?
-            array('status' => 'fail', 'message' => MessageConstant::UNEXPECTED_ERROR_HAS_OCCURRED) :
-            $this->delete($deleter, $request->get('id'));
+            ['status' => 'fail', 'message' => MessageConstant::UNEXPECTED_ERROR_HAS_OCCURRED] :
+            $this->delete($id);
 
         return new JsonResponse($response);
     }
 
-    private function delete(ObraDeleter $deleter, string $id): array
+    private function delete(string $id): array
     {
-        $deleter->__invoke($id);
+        $this->deleter->__invoke($id);
 
-        return array('status' => 'success');
+        return ['status' => 'success'];
     }
 }
-	

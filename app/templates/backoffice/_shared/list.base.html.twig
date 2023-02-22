@@ -2,25 +2,32 @@
 {% block body %}
 
     <div class="page-inner">
+        {% block topTitle  %}{% endblock %}
         <div class="page-header">
-            <h4 class="page-title">
-                <span> {{ 'List of'|trans }}</span>
-                    {{ page_title|trans }}
-            </h4>
-            <ul class="breadcrumbs d-none d-sm-block">
-                <li class="nav-home">
-                    <a href="{{ path('dashboard') }}">
-                        <i class="flaticon-home"></i>
-                    </a>
-                </li>
-                <li class="separator">
-                    <i class="flaticon-right-arrow"></i> {{ 'List'|trans }}
-                </li>
-            </ul>
+            {% block pageTitle  %}
+                <h4 class="page-title">
+                    <span> {{ 'List of'|trans }}</span>
+                        {{ page_title|trans }}
+                </h4>
+            {% endblock %}
+            {% block breadcrumbs %}>
+                <ul class="breadcrumbs d-none d-sm-block">
+                    <li class="nav-home">
+                        <a href="{{ path('dashboard') }}">
+                            <i class="flaticon-home"></i>
+                        </a>
+                    </li>
+                    <li class="separator">
+                        <i class="flaticon-right-arrow"></i> {{ 'List'|trans }}
+                    </li>
+                </ul>
+            {% endblock %}
+            {% block goBackButton %}{% endblock %}
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
+
                     <div class="card-body">
                         <div class="table-responsive">
                             <div id="add-row_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
@@ -29,7 +36,7 @@
                                     <div class="col-sm-5 d-none d-sm-block">
                                         <div class="dataTables_length" id="add-row_length">
                                             <form method="POST" id="number-of-rows-displayed-in-a-list"
-                                                  action="{{ path(list_path) }}/page-1/order-{{ order }}-{{ orderBy }}">
+                                                  action="{{ list_url }}/page-1/order-{{ order }}-{{ orderBy }}">
                                                 {{ 'Show'|trans }}
                                                 <select name="limit" class="form-control form-control-sm">
                                                     <option {{ limit == 10 ?  'selected' : '' }} value="10">10</option>
@@ -50,7 +57,7 @@
                                         {% block buttonsOnTopRightOfATable %}
                                             <a id="createItemLink"
                                                class="btn btn-dark  btn-round ml-auto float-right text-white"
-                                               href="{{ path(add_path) }}"
+                                               href="{{ add_url }}"
                                             >
                                                 {{ 'Add'|trans }}
                                                 <span class=" ml-1 btn-label">
@@ -63,7 +70,7 @@
 
                                     <div class="col-12">
                                         <a
-                                                href="{{ path(list_path) }}/page-{{ currentPage }}/order-{{ order }}-{{ orderBy }}/rows_per_page-{{ limit }}"
+                                                href="{{ list_url }}/page-{{ currentPage }}/order-{{ order }}-{{ orderBy }}/rows_per_page-{{ limit }}"
                                                 class="btn btn-black btn-border  btn-round t mr-2 btn-sm {{ filters == '' ? 'd-none':'' }}"
                                         >
                                                 <span class="btn-label">
@@ -93,12 +100,12 @@
 
                                                 <li class="paginate_button page-item previous d-none d-sm-block"
                                                     id="add-row_previous">
-                                                    <a href="{{ path(list_path) }}/page-1/order-{{ order }}-{{ orderBy }}/rows_per_page-{{ limit }}/{{ filters }}"
+                                                    <a href="{{ list_url }}/page-1/order-{{ order }}-{{ orderBy }}/rows_per_page-{{ limit }}/{{ filters }}"
                                                        class="page-link">{{ 'First'|trans }}</a>
                                                 </li>
 
                                                 <li class="paginate_button page-item previous" id="add-row_previous">
-                                                    <a href="{{ path(list_path) }}/page-{{ previousPage }}/order-{{ order }}-{{ orderBy }}/rows_per_page-{{ limit }}/{{ filters }}"
+                                                    <a href="{{ list_url }}/page-{{ previousPage }}/order-{{ order }}-{{ orderBy }}/rows_per_page-{{ limit }}/{{ filters }}"
                                                        class="page-link">
                                                         <i class="fas fa-angle-left"></i>
                                                     </a>
@@ -120,7 +127,7 @@
                                                     {% for pageNumber in range(1,totalPage) %}
                                                         <option
                                                                 {{ pageNumber == currentPage ? 'selected':'' }}
-                                                                data-page_url="{{ path(list_path) }}/page-{{ pageNumber }}/order-{{ order }}-{{ orderBy }}/rows_per_page-{{ limit }}/{{ filters }}"
+                                                                data-page_url="{{ list_url }}/page-{{ pageNumber }}/order-{{ order }}-{{ orderBy }}/rows_per_page-{{ limit }}/{{ filters }}"
                                                                 value="{{ pageNumber }}"
                                                         >
                                                             {{ pageNumber }}
@@ -129,14 +136,14 @@
                                                 </select>
 
                                                 <li class="paginate_button page-item next">
-                                                    <a href="{{ path(list_path) }}/page-{{ nextPage }}/order-{{ order }}-{{ orderBy }}/rows_per_page-{{ limit }}/{{ filters }}"
+                                                    <a href="{{ list_url }}/page-{{ nextPage }}/order-{{ order }}-{{ orderBy }}/rows_per_page-{{ limit }}/{{ filters }}"
                                                        class="page-link">
                                                         <i class="fas fa-angle-right"></i>
                                                     </a>
                                                 </li>
 
                                                 <li class="paginate_button page-item next d-none d-sm-block">
-                                                    <a href="{{ path(list_path) }}/page-{{ totalPage }}/order-{{ order }}-{{ orderBy }}/rows_per_page-{{ limit }}/{{ filters }}"
+                                                    <a href="{{ list_url }}/page-{{ totalPage }}/order-{{ order }}-{{ orderBy }}/rows_per_page-{{ limit }}/{{ filters }}"
                                                        class="page-link">{{ 'Last'|trans }}</a>
                                                 </li>
 
@@ -153,7 +160,7 @@
     </div>
     {# Start button to create an on mobile version #}
     {% block buttonToCreateOnMobileVersion %}
-        <a href="{{ path(add_path) }}" class="create-button show-button-description d-block d-sm-none">
+        <a href="{{ add_url }}" class="create-button show-button-description d-block d-sm-none">
             <i class="fas fa-plus create-icon"></i>
         </a>
     {% endblock %}
@@ -171,7 +178,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form id="filters-form"
-                      action="{{ path(list_path) }}/page-1/order-{{ order }}-{{ orderBy }}/rows_per_page-{{ limit }}">
+                      action="{{ list_url }}/page-1/order-{{ order }}-{{ orderBy }}/rows_per_page-{{ limit }}">
                     <div class="modal-header">
                         <h3 class="modal-title">Filtrar los datos del listado</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

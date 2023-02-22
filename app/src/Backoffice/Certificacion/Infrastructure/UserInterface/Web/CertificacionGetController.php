@@ -7,8 +7,9 @@ namespace App\Backoffice\Certificacion\Infrastructure\UserInterface\Web;
 
 use App\Backoffice\Certificacion\Application\Get\Collection\CertificacionByCriteriaCounter;
 use App\Backoffice\Certificacion\Application\Get\Collection\CertificacionByCriteriaSearcher;
+use App\Backoffice\Obra\Application\Get\Single\ObraFinder;
+use App\Backoffice\Obra\Infrastructure\UserInterface\Web\TwigTemplateConstants as ObraTemplateConstants;
 use App\Shared\Infrastructure\Symfony\WebController;
-use App\Shared\Infrastructure\UserInterface\Web\TwigTemplateGlobalConstants;
 use App\Shared\Infrastructure\Utils\FilterUtils;
 use App\Shared\Infrastructure\Utils\NextPage;
 use App\Shared\Infrastructure\Utils\OffsetPaginationUtil;
@@ -21,48 +22,70 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CertificacionGetController extends WebController
 {
-    public function __invoke(
-        Request $request,
-        CertificacionByCriteriaSearcher $itemsByCriteriaSearcher,
-        CertificacionByCriteriaCounter $counter
-    ): Response
+    private CertificacionByCriteriaSearcher $itemsByCriteriaSearcher;
+    private CertificacionByCriteriaCounter  $counter;
+    private TwigTemplateConstants           $twigTemplateConstants;
+    private ObraFinder                      $obraFinder;
+    /**
+     * @var ObraTemplateConstants
+     */
+    private ObraTemplateConstants $obraTemplateConstants;
+
+    public function __construct(CertificacionByCriteriaSearcher $itemsByCriteriaSearcher, CertificacionByCriteriaCounter $counter, TwigTemplateConstants $twigTemplateConstants, ObraFinder $obraFinder, ObraTemplateConstants $obraTemplateConstants)
     {
+        $this->itemsByCriteriaSearcher = $itemsByCriteriaSearcher;
+        $this->counter                 = $counter;
+        $this->twigTemplateConstants   = $twigTemplateConstants;
+        $this->obraFinder              = $obraFinder;
+        $this->obraTemplateConstants   = $obraTemplateConstants;
+    }
+
+    public function __invoke(Request $request): Response
+    {
+        $obraId  = $request->get('obraId');
         $orderBy = $request->get('orderBy');
-
-        $order = $request->get('order');
-
-        $page = (int)$request->get('page');
-
-        $limit = (int)$request->get('limit');
-
+        $order   = $request->get('order');
+        $page    = (int)$request->get('page');
+        $limit   = (int)$request->get('limit');
         $filters = FilterUtils::getFiltersOrEmpyArray($request->get('filters'));
 
-        $certificaciones = $itemsByCriteriaSearcher->__invoke($filters, $order, $orderBy, $limit,
-            OffsetPaginationUtil::calculate($limit, $page));
+        $defaultFilters = [
+            'field'    => 'obra',
+            'operator' => '=',
+            'value'    => $obraId,
+        ];
 
-        $totalItem = $counter->__invoke($filters, $order, $orderBy, $limit,
-            OffsetPaginationUtil::calculate($limit, $page));
+        array_push($filters, $defaultFilters);
+
+        $offset          = OffsetPaginationUtil::calculate($limit, $page);
+        $certificaciones = $this->itemsByCriteriaSearcher->__invoke($filters, $order, $orderBy, $limit, $offset);
+        $totalItem       = $this->counter->__invoke($filters, $order, $orderBy, $limit, $offset);
+
+        $obra = $this->obraFinder->__invoke($obraId);
 
         $totalNumberOfPages = TotalNumberOfPagesUtil::calculate($page, $limit, $totalItem);
 
-        return $this->render(TwigTemplateConstants::LIST_FILE_PATH, [
-            'page_title'                     => TwigTemplateConstants::SECTION_TITLE,
-            'list_path'                      => TwigTemplateConstants::LIST_PATH,
-            'edit_path'                      => TwigTemplateConstants::EDIT_PATH,
-            'add_path'                       => TwigTemplateConstants::ADD_PATH,
-            'delete_path'                    => TwigTemplateConstants::DELETE_PATH,
-            'delete_confirmation_modal_path' => TwigTemplateGlobalConstants::DELETE_CONFIRMATION_MODAL_PATH,
-            'orderBy'                        => $orderBy,
-            'order'                          => $order,
-            'limit'                          => $limit,
-            'filters'                        => $request->get('filters'),
-            'toggleSort'                     => SortUtils::toggle($orderBy),
-            'currentPage'                    => $page,
-            'nextPage'                       => NextPage::calculate($page, $totalNumberOfPages),
-            'previousPage'                   => PreviousPage::calculate($page),
-            'totalPage'                      => $totalNumberOfPages,
-            'totalItem'                      => $totalItem,
-            'certificaciones'                => $certificaciones
+        return $this->render($this->twigTemplateConstants::LIST_FILE_PATH, [
+            'page_title'                    => $this->twigTemplateConstants::SECTION_TITLE,
+            'obra_id'                       => $obraId,
+            'delete_confirmation_modal_url' => $this->twigTemplateConstants->getDeleteConfirmationModalUrl(),
+            'obra_nombre'                   => $obra->getNombreObra(),
+            'list_url'                      => $this->twigTemplateConstants->getListUrl(['obraId' => $obraId]),
+            'edit_path'                     => $this->twigTemplateConstants::EDIT_PATH,
+            'add_url'                       => $this->twigTemplateConstants->getAddUrl(['obraId' => $obraId]),
+            'delete_url'                    => $this->twigTemplateConstants->getDeleteUrl(),
+            'list_obra_url'                 => $this->obraTemplateConstants->getListUrl(),
+            'orderBy'                       => $orderBy,
+            'order'                         => $order,
+            'limit'                         => $limit,
+            'filters'                       => $request->get('filters'),
+            'toggleSort'                    => SortUtils::toggle($orderBy),
+            'currentPage'                   => $page,
+            'nextPage'                      => NextPage::calculate($page, $totalNumberOfPages),
+            'previousPage'                  => PreviousPage::calculate($page),
+            'totalPage'                     => $totalNumberOfPages,
+            'totalItem'                     => $totalItem,
+            'certificaciones'               => $certificaciones
         ]);
     }
 }

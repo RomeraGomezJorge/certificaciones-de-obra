@@ -17,12 +17,9 @@
         <field name="createAt"                          type="datetime" nullable="false"    column="create_at" />
         <one-to-many
                 field="certificaciones"
-                target-entity="App\Backoffice\Certifiacion\Domain\Certifiacion"
+                target-entity="App\Backoffice\Certificacion\Domain\Certificacion"
                 mapped-by="obra"
         >
-            <cascade>
-                <cascade-persist/>
-            </cascade>
             <order-by>
                 <order-by-field name="numeroCertificado"/>
             </order-by>
