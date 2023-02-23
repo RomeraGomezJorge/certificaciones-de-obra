@@ -16,12 +16,12 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AccountPutController extends WebController
 {
-    private AccountUpdater $updater;
+    private AccountUpdater     $updater;
     private ValidatorInterface $validator;
 
-    public function __construct(AccountUpdater $updater, ValidatorInterface $validator )
+    public function __construct(AccountUpdater $updater, ValidatorInterface $validator)
     {
-        $this->updater = $updater;
+        $this->updater   = $updater;
         $this->validator = $validator;
     }
 

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Backoffice\User\Infrastructure\UserInterface\Web;
 
-use App\Backoffice\Role\Domain\ValueObject\RoleId;
 use App\Backoffice\User\Application\Post\UserCreator;
+use App\Backoffice\User\Domain\UserConstants;
 use App\Shared\Infrastructure\Constant\MessageConstant;
 use App\Shared\Infrastructure\Symfony\WebController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -60,7 +60,7 @@ class UserPostController extends WebController
                     new Assert\Length(['min' => 8, 'max' => 20]),
                     new Assert\Regex("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/")
                 ],
-                'role_id'    => [new Assert\Choice(RoleId::VALID_ROLES)],
+                'role'       => [new Assert\Choice(array_keys(UserConstants::ROLES_DESCRIPTION))],
                 'is_active'  => [new Assert\Optional()],
                 'csrf_token' => [new Assert\NotBlank()]
             ]
@@ -92,7 +92,7 @@ class UserPostController extends WebController
             $request->get('surname'),
             $request->get('email'),
             $request->get('password'),
-            $request->get('role_id'),
+            $request->get('role'),
             (int)$isActive
         );
 

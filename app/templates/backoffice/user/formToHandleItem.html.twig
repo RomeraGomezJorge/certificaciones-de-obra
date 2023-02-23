@@ -132,14 +132,14 @@
                     <div class="form-group {{ flash.has('errors.role')? 'has-error':'' }}">
                         <div class="form-check" id="roles">
                             <label>Rol ( * )</label><br>
-                            {% for role in roles %}
+                            {% for key,value in roles %}
                                 <label class="form-radio-label">
                                     <input class="form-radio-input"
                                            type="radio"
-                                           name="role_id"
-                                           value="{{ role.id }}" {{ role_id == role.id? 'checked':'' }}
+                                           name="role"
+                                           value="{{ key }}" {{ role == key? 'checked':'' }}
                                     >
-                                    <span class="form-radio-sign">{{ role.description }}</span>
+                                    <span class="form-radio-sign">{{ value }}</span>
                                 </label>
                             {% endfor %}
                             <small class="errorLabelContainer form-text text-muted text-danger">

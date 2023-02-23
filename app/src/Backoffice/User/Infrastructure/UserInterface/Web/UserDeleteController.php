@@ -24,7 +24,7 @@ class UserDeleteController extends WebController
 
     public function __construct(UserDeleter $deleter, ValidationRulesToDelete $rulesToDelete)
     {
-        $this->deleter = $deleter;
+        $this->deleter       = $deleter;
         $this->rulesToDelete = $rulesToDelete;
     }
 
@@ -52,7 +52,7 @@ class UserDeleteController extends WebController
         return new JsonResponse($response);
     }
 
-    private function delete( string $id): array
+    private function delete(string $id): array
     {
         $this->deleter->__invoke($id);
 

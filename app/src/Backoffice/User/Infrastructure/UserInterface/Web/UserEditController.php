@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Backoffice\User\Infrastructure\UserInterface\Web;
 
-use App\Backoffice\Role\Domain\RoleRepository;
 use App\Backoffice\User\Application\Get\Single\UserFinder;
+use App\Backoffice\User\Domain\UserConstants;
 use App\Shared\Infrastructure\Constant\FormConstant;
 use App\Shared\Infrastructure\Symfony\FlashSession;
 use App\Shared\Infrastructure\Symfony\WebController;
@@ -14,19 +14,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserEditController extends WebController
 {
-    private FlashSession   $flashSession;
-    private UserFinder     $finder;
-    private RoleRepository $roleRepository;
-    /**
-     * @var TwigTemplateConstants
-     */
+    private FlashSession          $flashSession;
+    private UserFinder            $finder;
     private TwigTemplateConstants $twigTemplateConstants;
 
-    public function __construct(FlashSession $flashSession, UserFinder $finder, RoleRepository $roleRepository, TwigTemplateConstants $twigTemplateConstants)
+    public function __construct(FlashSession $flashSession, UserFinder $finder, TwigTemplateConstants $twigTemplateConstants)
     {
         $this->flashSession          = $flashSession;
         $this->finder                = $finder;
-        $this->roleRepository        = $roleRepository;
         $this->twigTemplateConstants = $twigTemplateConstants;
     }
 
@@ -45,9 +40,9 @@ class UserEditController extends WebController
             'name'                      => $this->flashSession->get('inputs.name') ?? $user->getName(),
             'surname'                   => $this->flashSession->get('inputs.surname') ?? $user->getSurname(),
             'email'                     => $this->flashSession->get('inputs.email') ?? $user->getEmail(),
-            'role_id'                   => $this->flashSession->get('inputs.role_id') ?? $user->getRole()->getId(),
+            'role'                      => $this->flashSession->get('inputs.role') ?? $user->getRole(),
             'is_active'                 => $this->flashSession->get('inputs.is_active') ?? $user->getIsActive(),
-            'roles'                     => $this->roleRepository->searchAll(),
+            'roles'                     => UserConstants::ROLES_DESCRIPTION,
             'form_action_attribute_url' => $this->twigTemplateConstants->getUpdateUrl(),
             'submit_button_label'       => FormConstant::SUBMIT_BUTTON_VALUE_TO_UPDATE,
             'action_to_do'              => FormConstant::UPDATE_LABEL_TEXT,

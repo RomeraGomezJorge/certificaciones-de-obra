@@ -32,6 +32,10 @@ class ObraPostController extends WebController
         }
 
         $validationErrors = $this->validationRules->verify($request);
+//
+//        var_dump(json_encode($validationErrors));
+//        var_dump(json_encode($validationErrors);
+//        die();
 
         return $validationErrors->count() !== 0
             ? $this->redirectWithErrors(TwigTemplateConstants::CREATE_PATH, $validationErrors, $request)

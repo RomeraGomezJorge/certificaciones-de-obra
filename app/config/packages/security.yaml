@@ -34,7 +34,9 @@ security:
   # Easy way to control access for large sections of your site
   # Note: Only the *first* access control that matches will be used
   access_control:
-    - { path: '^/backoffice', roles: [ROLE_ADMIN,ROLE_USER] }
+    - { path: '^/backoffice/dashboard/dashboard', roles: [ROLE_ADMIN,ROLE_CERTIFICACION_OBRA] }
+    - { path: '^/backoffice/certificacion-de-obra', roles: [ROLE_CERTIFICACION_OBRA] }
+    - { path: '^/backoffice/user', roles: [ROLE_ADMIN] }
 
 
   encoders:

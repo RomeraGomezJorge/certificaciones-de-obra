@@ -27,6 +27,8 @@ abstract class WebController extends AbstractController
         array $parameters = []
     ): RedirectResponse
     {
+        var_dump($this->formatFlashErrors($errors));
+        die();
         $this->addFlashFor('hasErrors', [true]);
         $this->addFlashFor('errors', $this->formatFlashErrors($errors));
         $this->addFlashFor('inputs', $request->request->all());

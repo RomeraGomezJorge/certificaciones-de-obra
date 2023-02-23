@@ -4,11 +4,11 @@ user_directory:
 
 obra_directory:
   resource: '../src/Backoffice/Obra/Infrastructure/UserInterface/Routes/obra_routes.yaml'
-  prefix: /backoffice/obra
+  prefix: /backoffice/certificacion-de-obra/obra
 
 certificacion_directory:
   resource: '../src/Backoffice/Certificacion/Infrastructure/UserInterface/Routes/certificacion_routes.yaml'
-  prefix: /backoffice/certificacion
+  prefix: /backoffice/certificacion-de-obra/certicacion
 
 reset_password_request_directory:
   resource: '../src/Backoffice/Authentication/ResetPasswordRequest/Infrastructure/UserInterface/Routes/reset_password_request_routes.yaml'

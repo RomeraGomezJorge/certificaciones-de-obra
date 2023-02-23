@@ -219,7 +219,11 @@ class Certificacion
      */
     public function getUbicacionDespription():string
     {
-        return CertificacionConstant::UBICACIONES_DESCRIPTION[$this->ubicacion];
+        if ($this->ubicacion) {
+            return CertificacionConstant::UBICACIONES_DESCRIPTION[$this->ubicacion];
+        }
+
+        return '';
     }
 
 }

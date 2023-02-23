@@ -10,7 +10,7 @@
 								<span>
                                     {% if app.user.surname is defined %}
                                         {{ app.user.surname }}, {{ app.user.name }}
-                                        <span class="user-level">{{ app.user.role.description }}</span>
+                                        <span class="user-level">{{ app.user.roleDescription }}</span>
                                         <span class="caret"></span>
                                     {% endif %}
 								</span>

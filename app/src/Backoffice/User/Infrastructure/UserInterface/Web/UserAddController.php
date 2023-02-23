@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Backoffice\User\Infrastructure\UserInterface\Web;
 
-use App\Backoffice\Role\Domain\RoleRepository;
+use App\Backoffice\User\Domain\UserConstants;
 use App\Shared\Infrastructure\Constant\FormConstant;
 use App\Shared\Infrastructure\RamseyUuidGenerator;
 use App\Shared\Infrastructure\Symfony\FlashSession;
@@ -15,14 +15,12 @@ class UserAddController extends WebController
 {
     private FlashSession          $flashSession;
     private RamseyUuidGenerator   $ramseyUuidGenerator;
-    private RoleRepository        $roleRepository;
     private TwigTemplateConstants $twigTemplateConstants;
 
-    public function __construct(FlashSession $flashSession, RamseyUuidGenerator $ramseyUuidGenerator, RoleRepository $roleRepository, TwigTemplateConstants $twigTemplateConstants)
+    public function __construct(FlashSession $flashSession, RamseyUuidGenerator $ramseyUuidGenerator, TwigTemplateConstants $twigTemplateConstants)
     {
         $this->flashSession          = $flashSession;
         $this->ramseyUuidGenerator   = $ramseyUuidGenerator;
-        $this->roleRepository        = $roleRepository;
         $this->twigTemplateConstants = $twigTemplateConstants;
     }
 
@@ -39,9 +37,9 @@ class UserAddController extends WebController
             'surname'                   => $this->flashSession->get('inputs.surname'),
             'email'                     => $this->flashSession->get('inputs.email'),
             'password'                  => '',
-            'role_id'                   => $this->flashSession->get('inputs.role_id'),
+            'role'                      => $this->flashSession->get('inputs.role'),
             'is_active'                 => $this->flashSession->get('inputs.is_active'),
-            'roles'                     => $this->roleRepository->searchAll(),
+            'roles'                     => UserConstants::ROLES_DESCRIPTION,
             'form_action_attribute_url' => $this->twigTemplateConstants->getCreateUrl(),
             'submit_button_label'       => FormConstant::SUBMIT_BUTTON_VALUE_TO_CREATE,
             'action_to_do'              => FormConstant::CREATE_LABEL_TEXT,

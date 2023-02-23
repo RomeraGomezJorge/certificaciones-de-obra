@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Backoffice\User\Infrastructure\UserInterface\Web;
 
-use App\Backoffice\Role\Domain\ValueObject\RoleId;
 use App\Backoffice\User\Application\Put\UserDetailsChanger;
+use App\Backoffice\User\Domain\UserConstants;
 use App\Shared\Infrastructure\Constant\MessageConstant;
 use App\Shared\Infrastructure\Symfony\WebController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -20,9 +20,9 @@ class UserPutController extends WebController
     private UserDetailsChanger $updater;
     private ValidatorInterface $validator;
 
-    public function __construct(UserDetailsChanger $updater,ValidatorInterface $validator)
+    public function __construct(UserDetailsChanger $updater, ValidatorInterface $validator)
     {
-        $this->updater = $updater;
+        $this->updater   = $updater;
         $this->validator = $validator;
     }
 
@@ -50,7 +50,7 @@ class UserPutController extends WebController
                 'name'       => [new Assert\NotBlank(), new Assert\Length(['min' => 1, 'max' => 100])],
                 'surname'    => [new Assert\NotBlank(), new Assert\Length(['min' => 1, 'max' => 100])],
                 'email'      => [new Assert\NotBlank(), new Assert\Email()],
-                'role_id'    => [new Assert\Choice(RoleId::VALID_ROLES)],
+                'role'       => [new Assert\Choice(array_keys(UserConstants::ROLES_DESCRIPTION))],
                 'is_active'  => [new Assert\Optional()],
                 'csrf_token' => [new Assert\NotBlank()]
             ]
@@ -71,7 +71,7 @@ class UserPutController extends WebController
             $request->get('name'),
             $request->get('surname'),
             $request->get('email'),
-            $request->get('role_id'),
+            $request->get('role'),
             (int)$isActive
         );
 

@@ -28,7 +28,7 @@ function appendRuleAtLeastOneNumber() {
 }
 
 function appendRuleRequiredRoleId() {
-    $('input[name="role_id"]').rules("add", {
+    $('input[name="role"]').rules("add", {
         required: true
     });
 }
