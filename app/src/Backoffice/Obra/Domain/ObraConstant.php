@@ -6,14 +6,16 @@ namespace App\Backoffice\Obra\Domain;
 
 class ObraConstant
 {
-    const FUENTE_FINANCIERA_NACION     = 'NACI';
-    const FUENTE_FINACIERA_PROVINCIA   = 'PROV';
-    const FUENTE_FINACIERA_SIN_DEFINIR = 'SIND';
+    const FUENTE_FINANCIERA_NACION            = 'NACI';
+    const FUENTE_FINACIERA_PROVINCIA          = 'PROV';
+    const FUENTE_FINACIERA_NACION_Y_PROVINCIA = 'NAPR';
+    const FUENTE_FINACIERA_SIN_DEFINIR        = 'SIND';
 
     const FUENTES_FINANCIERAS_DESCRIPTION = [
-        self::FUENTE_FINANCIERA_NACION   => 'Nación',
-        self::FUENTE_FINACIERA_PROVINCIA => 'Provincia',
-        self::FUENTE_FINACIERA_SIN_DEFINIR => 'Sin definir',
+        self::FUENTE_FINANCIERA_NACION            => 'Nación',
+        self::FUENTE_FINACIERA_PROVINCIA          => 'Provincia',
+        self::FUENTE_FINACIERA_NACION_Y_PROVINCIA => 'Nación y provincia ',
+        self::FUENTE_FINACIERA_SIN_DEFINIR        => 'Sin definir',
     ];
 
     const ESTADO_PRESUPUESTARIO_SIN_DEFINIR              = null;

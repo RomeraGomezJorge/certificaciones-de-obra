@@ -23,12 +23,13 @@ final class ValidationRulesToCreateAndUpdate
         $constraint = new Assert\Collection(
             [
                 'id'                    => [new Assert\Uuid()],
-                'obraId'                    => [new Assert\Uuid()],
+                'obraId'                => [new Assert\Uuid()],
                 'numeroCertificado'     => [new Assert\Optional()],
                 'fecha'                 => [new Assert\Optional(new Assert\Date())],
                 'expedienteCertificado' => [new Assert\Optional()],
                 'porcentajeAvanceObra'  => [new Assert\Range(['min' => 0, 'max' => 100])],
-                'montoPagado'           => [new Assert\Optional(new Assert\PositiveOrZero())],
+                'montoPagadoNacion'     => [new Assert\Optional(new Assert\PositiveOrZero())],
+                'montoPagadoProvincia'  => [new Assert\Optional(new Assert\PositiveOrZero())],
                 'ubicacion'             => [new Assert\Optional(new Assert\Choice(array_keys(CertificacionConstant::UBICACIONES_DESCRIPTION)))],
                 'numeroSidif'           => [new Assert\Optional()],
                 'fechaInicioPago'       => [new Assert\Optional(new Assert\Date())],

@@ -52,7 +52,8 @@ class ObraPutController extends WebController
             $request->get('presupuestoDisponibleRegularizado'),
             $request->get('estadoPresupuestario'),
             $request->get('estadoObra'),
-            $request->get('estadoTramite')
+            $request->get('estadoTramite'),
+            $request->get('empresaId')
         );
 
         return $this->redirectWithMessage(

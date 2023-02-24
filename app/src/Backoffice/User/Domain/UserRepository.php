@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Backoffice\User\Domain;
 
-use App\Backoffice\Role\Domain\Role;
+use App\Backoffice\Role\Domain\Empresa;
 use App\Shared\Domain\Criteria\Criteria;
 use App\Shared\Domain\ValueObject\Uuid;
 

@@ -37,6 +37,16 @@ final class MySqlCertificacionRepository extends DoctrineRepository implements C
         return $this->repository(self::ENTITY_CLASS)->findAll();
     }
 
+    public function searchByObra(string $id)
+    {
+        return $this->repository(self::ENTITY_CLASS)
+            ->createQueryBuilder('c')
+            ->innerJoin('c.obra','o')
+            ->andWhere('o = :id')->setParameter(':id', $id)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function matching(Criteria $criteria, ?Obra $obra): array
     {
         $doctrineCriteria        = DoctrineCriteriaConverter::convert($criteria);

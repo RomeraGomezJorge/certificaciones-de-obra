@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Backoffice\Certificacion\Infrastructure\UserInterface\Web;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Backoffice\Certificacion\Application\Put\CertificacionChangerDetails;
 use App\Shared\Infrastructure\Constant\MessageConstant;
 use App\Shared\Infrastructure\Symfony\WebController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -29,7 +29,7 @@ class CertificacionPutController extends WebController
         $id                  = $request->get('id');
         $isCsrfTokenValid    = $this->isCsrfTokenValid($id, $request->get('csrf_token'));
 
-        if (!$isCsrfTokenValid) {
+        if(! $isCsrfTokenValid) {
             return $this->redirectWithMessage('error_page', MessageConstant::INVALID_TOKEN_CSFR_MESSAGE);
         }
 
@@ -48,7 +48,8 @@ class CertificacionPutController extends WebController
             $request->get('fecha'),
             $request->get('expedienteCertificado'),
             $request->get('porcentajeAvanceObra'),
-            $request->get('montoPagado'),
+            $request->get('montoPagadoNacion'),
+            $request->get('montoPagadoProvincia'),
             $request->get('ubicacion'),
             $request->get('numeroSidif'),
             $request->get('fechaInicioPago'),

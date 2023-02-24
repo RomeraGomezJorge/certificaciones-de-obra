@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Backoffice\Obra\Domain;
 
-use App\Backoffice\Certificacion\Domain\Certificacion;
+use App\Backoffice\Empresa\Domain\Empresa;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -23,6 +23,7 @@ class Obra
     private ?string                    $estadoObra;
     private ?string                    $estadoTramite;
     private ?Collection                $certificaciones;
+    private Empresa                    $empresa;
     private Datetime                   $createAt;
 
     public function __construct()
@@ -206,22 +207,38 @@ class Obra
         $this->estadoTramite = $estadoTramite;
     }
 
-//    /**
-//     * @param null|ArrayCollection $certificaciones
-//     */
-//    public function setCertificaciones(?ArrayCollection $certificaciones): void
-//    {
-//        $this->certificaciones = $certificaciones;
-//    }
-//
-//
-//    /**
-//     * @return null|ArrayCollection
-//     */
-//    public function getCertificaciones(): ?ArrayCollection
-//    {
-//        return $this->certificaciones;
-//    }
+    /**
+     * @param null|ArrayCollection $certificaciones
+     */
+    public function setCertificaciones(?ArrayCollection $certificaciones): void
+    {
+        $this->certificaciones = $certificaciones;
+    }
+
+
+    /**
+     * @return null|ArrayCollection
+     */
+    public function getCertificaciones(): ?ArrayCollection
+    {
+        return $this->certificaciones;
+    }
+
+    /**
+     * @param Empresa $empresa
+     */
+    public function setEmpresa(Empresa $empresa): void
+    {
+        $this->empresa = $empresa;
+    }
+
+    /**
+     * @return Empresa
+     */
+    public function getEmpresa(): Empresa
+    {
+        return $this->empresa;
+    }
 
     /**
      * @return DateTime
@@ -237,6 +254,36 @@ class Obra
     public function setCreateAt(DateTime $createAt): void
     {
         $this->createAt = $createAt;
+    }
+
+    public function getAvanceObraPorcentaje()
+    {
+        $porcentaje[] = 0;
+
+        foreach ($this->certificaciones as $certificacion) {
+            $porcentaje[] = $certificacion->getPorcentajeAvanceObra();
+        }
+
+        return max($porcentaje);
+    }
+
+
+    public function numeroCertificadoSuggestion(): ?int
+    {
+        $numerosCertificado = [];
+
+        foreach ($this->certificaciones as $certificacion) {
+            $numerosCertificado[] = $certificacion->getNumeroCertificado();
+        }
+
+        // dont give suggestions if dont have previous values
+        if(empty($numerosCertificado)) {
+            return null;
+        }
+
+        $suggestion = max($numerosCertificado);
+
+        return $suggestion + 1;
     }
 
 }

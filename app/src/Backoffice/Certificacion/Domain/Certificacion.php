@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Backoffice\Certificacion\Domain;
 
 use App\Backoffice\Obra\Domain\Obra;
+use App\Backoffice\Obra\Domain\ObraConstant;
 use DateTime;
 
 class Certificacion
@@ -14,7 +15,8 @@ class Certificacion
     private ?DateTime    $fecha;
     private ?string      $expedienteCertificado;
     private ?float       $porcentajeAvanceObra;
-    private ?float       $montoPagado;
+    private ?float       $montoPagadoNacion;
+    private ?float       $montoPagadoProvincia;
     private ?string      $ubicacion;
     private ?string      $numeroSidif;
     private ?DateTime    $fechaInicioPago;
@@ -39,7 +41,7 @@ class Certificacion
     }
 
     /**
-     * @return ?int
+     * @return null|int
      */
     public function getNumeroCertificado(): ?int
     {
@@ -47,7 +49,7 @@ class Certificacion
     }
 
     /**
-     * @param ?int $numeroCertificado
+     * @param null|int $numeroCertificado
      */
     public function setNumeroCertificado(?int $numeroCertificado): void
     {
@@ -55,7 +57,7 @@ class Certificacion
     }
 
     /**
-     * @return ?DateTime
+     * @return null|DateTime
      */
     public function getFecha(): ?DateTime
     {
@@ -63,7 +65,7 @@ class Certificacion
     }
 
     /**
-     * @param ?DateTime $fecha
+     * @param null|DateTime $fecha
      */
     public function setFecha(?DateTime $fecha): void
     {
@@ -71,7 +73,7 @@ class Certificacion
     }
 
     /**
-     * @return ?string
+     * @return null|string
      */
     public function getExpedienteCertificado(): ?string
     {
@@ -79,7 +81,7 @@ class Certificacion
     }
 
     /**
-     * @param ?string $expedienteCertificado
+     * @param null|string $expedienteCertificado
      */
     public function setExpedienteCertificado(?string $expedienteCertificado): void
     {
@@ -87,7 +89,7 @@ class Certificacion
     }
 
     /**
-     * @return ?float
+     * @return null|float
      */
     public function getPorcentajeAvanceObra(): ?float
     {
@@ -95,7 +97,7 @@ class Certificacion
     }
 
     /**
-     * @param ?float $porcentajeAvanceObra
+     * @param null|float $porcentajeAvanceObra
      */
     public function setPorcentajeAvanceObra(?float $porcentajeAvanceObra): void
     {
@@ -103,23 +105,39 @@ class Certificacion
     }
 
     /**
-     * @return ?float
+     * @return null|float
      */
-    public function getMontoPagado(): ?float
+    public function getMontoPagadoNacion(): ?float
     {
-        return $this->montoPagado;
+        return $this->montoPagadoNacion;
     }
 
     /**
-     * @param ?float $montoPagado
+     * @param null|float $montoPagadoNacion
      */
-    public function setMontoPagado(?float $montoPagado): void
+    public function setMontoPagadoNacion(?float $montoPagadoNacion): void
     {
-        $this->montoPagado = $montoPagado;
+        $this->montoPagadoNacion = $montoPagadoNacion;
     }
 
     /**
-     * @return ?string
+     * @return null|float
+     */
+    public function getMontoPagadoProvincia(): ?float
+    {
+        return $this->montoPagadoProvincia;
+    }
+
+    /**
+     * @param null|float $montoPagadoProvincia
+     */
+    public function setMontoPagadoProvincia(?float $montoPagadoProvincia): void
+    {
+        $this->montoPagadoProvincia = $montoPagadoProvincia;
+    }
+
+    /**
+     * @return null|string
      */
     public function getUbicacion(): ?string
     {
@@ -127,7 +145,7 @@ class Certificacion
     }
 
     /**
-     * @param ?string $ubicacion
+     * @param null|string $ubicacion
      */
     public function setUbicacion(?string $ubicacion): void
     {
@@ -135,7 +153,7 @@ class Certificacion
     }
 
     /**
-     * @return ?string
+     * @return null|string
      */
     public function getNumeroSidif(): ?string
     {
@@ -143,7 +161,7 @@ class Certificacion
     }
 
     /**
-     * @param ?string $numeroSidif
+     * @param null|string $numeroSidif
      */
     public function setNumeroSidif(?string $numeroSidif): void
     {
@@ -151,7 +169,7 @@ class Certificacion
     }
 
     /**
-     * @return ?Datetime
+     * @return null|Datetime
      */
     public function getFechaInicioPago(): ?Datetime
     {
@@ -159,7 +177,7 @@ class Certificacion
     }
 
     /**
-     * @param ?Datetime $fechaInicioPago
+     * @param null|Datetime $fechaInicioPago
      */
     public function setFechaInicioPago(?Datetime $fechaInicioPago): void
     {
@@ -167,7 +185,7 @@ class Certificacion
     }
 
     /**
-     * @return ?DateTime
+     * @return null|DateTime
      */
     public function getFechaFinPago(): ?DateTime
     {
@@ -175,7 +193,7 @@ class Certificacion
     }
 
     /**
-     * @param ?DateTime $fechaFinPago
+     * @param null|DateTime $fechaFinPago
      */
     public function setFechaFinPago(?DateTime $fechaFinPago): void
     {
@@ -224,6 +242,21 @@ class Certificacion
         }
 
         return '';
+    }
+
+    public function getFuenteFinancieraCertificado()
+    {
+        $fuenteFinanciera = ObraConstant::FUENTE_FINACIERA_SIN_DEFINIR;
+
+        if($this->montoPagadoProvincia && $this->montoPagadoNacion) {
+            $fuenteFinanciera = ObraConstant::FUENTE_FINACIERA_NACION_Y_PROVINCIA;
+        } elseif($this->montoPagadoProvincia) {
+            $fuenteFinanciera = ObraConstant::FUENTE_FINACIERA_PROVINCIA;
+        } elseif($this->montoPagadoNacion) {
+            $fuenteFinanciera = ObraConstant::FUENTE_FINANCIERA_NACION;
+        }
+
+        return ObraConstant::FUENTES_FINANCIERAS_DESCRIPTION[$fuenteFinanciera];
     }
 
 }

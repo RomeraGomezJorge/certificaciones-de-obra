@@ -1,7 +1,7 @@
 {% extends 'backoffice/_shared/formToHandleItem.base.html.twig' %}
 {% block form %}
 
-    <form action="{{ form_action_attribute_url}}" method="post" id="form" novalidate="novalidate">
+    <form action="{{ form_action_attribute_url }}" method="post" id="form" novalidate="novalidate">
 
         <div class="card-body">
 
@@ -17,21 +17,33 @@
 
                         <div class="form-group {{ flash.has('errors.nombreObra')? 'has-error':'' }}">
                             <label>Obra</label>
-                            <input type="text"
+                            <textarea
                                    placeholder=" - {{ 'Optional'|trans }} -"
                                    name="nombreObra"
-                                   value="{{ nombreObra }}"
-                                   maxlength="100"
+                                   maxlength="255"
                                    class="form-control"
+                                   rows="3"
                                    autofocus
-                            />
+                            /> {{ nombreObra }}</textarea>
                             <small class="errorLabelContainer form-text text-muted text-danger">
                                 <span class="has-error">{{ flash.has('errors.nombreObra') }} </span>
                             </small>
                         </div>
 
+                        <div class="form-group {{ flash.has('errors.empresaId')? 'has-error':'' }}">
+                            <label>Empresa ( * )</label>
+                            <select name="empresaId" class="form-control" required="required">
+                                {% for empresa in empresa_choices %}
+                                    <option value="{{ empresa.id }}" > {{ empresa.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                            <small class="errorLabelContainer form-text text-muted text-danger">
+                                <span class="has-error">{{ flash.get('errors.empresaId') }} </span>
+                            </small>
+                        </div>
+
                         <div class="form-group {% if flash.has('errors.fuenteFinanciera') %} has-error {% endif %}">
-                            <div class="form-check" id="roles">
+                            <div class="form-check">
                                 <label>Fuente financiera</label><br>
                                 {% for key,value  in fuente_financiera_choices %}
                                     <label class="form-radio-label">
@@ -41,7 +53,7 @@
                                                value="{{ key }}" {{ key  == fuenteFinanciera? 'checked':'' }}
                                         >
                                         <span class="form-radio-sign">{{ value }}</span>
-                                    </label>
+                                    </label><br>
                                 {% endfor %}
                                 <small class="errorLabelContainer form-text text-muted text-danger">
                                     {% if flash.has('errors.fuenteFinanciera') %}
@@ -83,7 +95,6 @@
                                    placeholder=" - {{ 'Optional'|trans }} -"
                                    name="montoObra"
                                    value="{{ montoObra }}"
-                                   maxlength="12"
                                    class="form-control"
                             >
                             <small class="errorLabelContainer form-text text-muted text-danger">

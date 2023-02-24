@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Backoffice\Obra\Infrastructure\UserInterface\Web;
 
+use App\Backoffice\Empresa\Domain\EmpresaRepository;
 use App\Backoffice\Obra\Application\Get\Single\ObraFinder;
 use App\Backoffice\Obra\Domain\ObraConstant;
 use App\Shared\Infrastructure\Constant\FormConstant;
@@ -18,12 +19,14 @@ class ObraEditController extends WebController
     private FlashSession          $flashSession;
     private ObraFinder            $finder;
     private TwigTemplateConstants $twigTemplateConstants;
+    private EmpresaRepository     $empresaRepository;
 
-    public function __construct(FlashSession $flashSession, ObraFinder $finder, TwigTemplateConstants $twigTemplateConstants)
+    public function __construct(FlashSession $flashSession, ObraFinder $finder, TwigTemplateConstants $twigTemplateConstants, EmpresaRepository $empresaRepository)
     {
         $this->flashSession          = $flashSession;
         $this->finder                = $finder;
         $this->twigTemplateConstants = $twigTemplateConstants;
+        $this->empresaRepository     = $empresaRepository;
     }
 
     public function __invoke(Request $request): Response
@@ -45,6 +48,8 @@ class ObraEditController extends WebController
             'estadoPresupuestario'              => $this->flashSession->get('inputs.estadoPresupuestario') ?? $obra->getEstadoPresupuestario(),
             'estadoObra'                        => $this->flashSession->get('inputs.estadoObra') ?? $obra->getEstadoObra(),
             'estadoTramite'                     => $this->flashSession->get('inputs.estadoTramite') ?? $obra->getEstadoTramite(),
+            'empresaId'                         => $this->flashSession->get('inputs.empresaId') ?? $obra->getEmpresa()->getId(),
+            'empresa_choices'                   => $this->empresaRepository->searchAll(),
             'fuente_financiera_choices'         => ObraConstant::FUENTES_FINANCIERAS_DESCRIPTION,
             'estado_presupuestario_choices'     => ObraConstant::ESTADOS_PRESUPUESTARIOS_DESCRIPTION,
             'estado_obra_choices'               => ObraConstant::ESTADOS_OBRA_DESCRIPTION,

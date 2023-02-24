@@ -10,11 +10,10 @@ use App\Backoffice\Obra\Application\Get\Single\ObraFinder;
 use App\Backoffice\Obra\Infrastructure\UserInterface\Web\TwigTemplateConstants as ObraTemplateConstants;
 use App\Shared\Infrastructure\Constant\FormConstant;
 use App\Shared\Infrastructure\Symfony\FlashSession;
-use App\Shared\Infrastructure\Symfony\WebController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CertificacionEditController extends WebController
+class CertificacionEditController extends CertificacionBaseController
 {
 
     private FlashSession          $flashSession;
@@ -44,25 +43,28 @@ class CertificacionEditController extends WebController
 
 
         return $this->render(TwigTemplateConstants::FORM_FILE_PATH, [
-            'page_title'                => $this->twigTemplateConstants::SECTION_TITLE,
-            'list_url'                  => $this->twigTemplateConstants->getListUrl($urlParams),
-            'id'                        => $certificacion->getId(),
-            'obraId'                    => $obraId,
-            'list_obra_url'             => $this->obraTemplateConstants->getListUrl(),
-            'obra_nombre'               => $obra->getNombreObra(),
-            'numeroCertificado'         => $this->flashSession->get('inputs.numeroCertificado') ?? $certificacion->getNumeroCertificado(),
-            'fecha'                     => $this->flashSession->get('inputs.fecha') ?? $certificacion->getFecha()->format('d/m/Y'),
-            'expedienteCertificado'     => $this->flashSession->get('inputs.expedienteCertificado') ?? $certificacion->getExpedienteCertificado(),
-            'porcentajeAvanceObra'      => $this->flashSession->get('inputs.porcentajeAvanceObra') ?? $certificacion->getPorcentajeAvanceObra(),
-            'montoPagado'               => $this->flashSession->get('inputs.montoPagado') ?? $certificacion->getMontoPagado(),
-            'ubicacion'                 => $this->flashSession->get('inputs.ubicacion') ?? $certificacion->getUbicacion(),
-            'numeroSidif'               => $this->flashSession->get('inputs.numeroSidif') ?? $certificacion->getNumeroSidif(),
-            'fechaInicioPago'           => $this->flashSession->get('inputs.fechaInicioPago') ?? $certificacion->getFechaInicioPago()->format('d/m/Y'),
-            'fechaFinPago'              => $this->flashSession->get('inputs.fechaFinPago') ?? $certificacion->getFechaFinPago()->format('d/m/Y'),
-            'ubicaciones_choices'       => CertificacionConstant::UBICACIONES_DESCRIPTION,
-            'form_action_attribute_url' => $this->twigTemplateConstants->getUpdateUrl(),
-            'submit_button_label'       => FormConstant::SUBMIT_BUTTON_VALUE_TO_UPDATE,
-            'action_to_do'              => FormConstant::UPDATE_LABEL_TEXT,
+            'page_title'                  => $this->twigTemplateConstants::SECTION_TITLE,
+            'list_url'                    => $this->twigTemplateConstants->getListUrl($urlParams),
+            'id'                          => $certificacion->getId(),
+            'obraId'                      => $obraId,
+            'list_obra_url'               => $this->obraTemplateConstants->getListUrl(),
+            'obra_nombre'                 => $obra->getNombreObra(),
+            'numeroCertificado'           => $this->flashSession->get('inputs.numeroCertificado') ?? $certificacion->getNumeroCertificado(),
+            'fecha'                       => $this->flashSession->get('inputs.fecha') ?? $certificacion->getFecha()->format('d/m/Y'),
+            'expedienteCertificado'       => $this->flashSession->get('inputs.expedienteCertificado') ?? $certificacion->getExpedienteCertificado(),
+            'porcentajeAvanceObra'        => $this->flashSession->get('inputs.porcentajeAvanceObra') ?? $certificacion->getPorcentajeAvanceObra(),
+            'montoPagadoNacion'           => $this->flashSession->get('inputs.montoPagadoNacion') ?? $certificacion->getMontoPagadoNacion(),
+            'montoPagadoProvincia'        => $this->flashSession->get('inputs.montoPagadoProvincia') ?? $certificacion->getMontoPagadoProvincia(),
+            'ubicacion'                   => $this->flashSession->get('inputs.ubicacion') ?? $certificacion->getUbicacion(),
+            'numeroSidif'                 => $this->flashSession->get('inputs.numeroSidif') ?? $certificacion->getNumeroSidif(),
+            'fechaInicioPago'             => $this->flashSession->get('inputs.fechaInicioPago') ?? $certificacion->getFechaInicioPago()->format('d/m/Y'),
+            'fechaFinPago'                => $this->flashSession->get('inputs.fechaFinPago') ?? $certificacion->getFechaFinPago()->format('d/m/Y'),
+            'show_monto_pagado_provincia' => $this->showMontoPagadoProvincia($obra->getFuenteFinanciera()),
+            'show_monto_pagado_nacion'    => $this->showMontoPagadoNacion($obra->getFuenteFinanciera()),
+            'ubicaciones_choices'         => CertificacionConstant::UBICACIONES_DESCRIPTION,
+            'form_action_attribute_url'   => $this->twigTemplateConstants->getUpdateUrl(),
+            'submit_button_label'         => FormConstant::SUBMIT_BUTTON_VALUE_TO_UPDATE,
+            'action_to_do'                => FormConstant::UPDATE_LABEL_TEXT,
         ]);
     }
 

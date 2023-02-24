@@ -17,11 +17,11 @@ doctrine:
         prefix: 'App\Backoffice\User\Domain'
         alias: App
 
-      App\Backoffice\Role:
+      App\Backoffice\Empresa:
         is_bundle: false
         type: xml
-        dir: '%kernel.project_dir%/src/Backoffice/Role/Infrastructure/Persistence/Doctrine'
-        prefix: 'App\Backoffice\Role\Domain'
+        dir: '%kernel.project_dir%/src/Backoffice/Empresa/Infrastructure/Persistence/Doctrine'
+        prefix: 'App\Backoffice\Empresa\Domain'
         alias: App
 
 

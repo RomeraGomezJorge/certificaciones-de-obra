@@ -33,6 +33,7 @@ final class ValidationRulesToCreateAndUpdate
                 'estadoPresupuestario'              => [new Assert\Optional(new Assert\Choice(array_keys(ObraConstant::ESTADOS_PRESUPUESTARIOS_DESCRIPTION)))],
                 'estadoObra'                        => [new Assert\Optional(new Assert\Choice(array_keys(ObraConstant::ESTADOS_OBRA_DESCRIPTION)))],
                 'estadoTramite'                     => [new Assert\Optional()],
+                'empresaId'                         => [new Assert\Uuid()],
                 'csrf_token'                        => [new Assert\NotBlank()]
             ]
         );

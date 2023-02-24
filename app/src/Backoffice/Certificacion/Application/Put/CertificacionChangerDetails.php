@@ -31,7 +31,8 @@ final class CertificacionChangerDetails
         $fecha,
         $expedienteCertificado,
         $porcentajeAvanceObra,
-        $montoPagado,
+        $montoPagadoNacion,
+        $montoPagadoProvincia,
         $ubicacion,
         $numeroSidif,
         $fechaInicioPago,
@@ -52,7 +53,8 @@ final class CertificacionChangerDetails
         $certificacion->setFecha($fecha);
         $certificacion->setExpedienteCertificado($expedienteCertificado);
         $certificacion->setPorcentajeAvanceObra((float)$porcentajeAvanceObra);
-        $certificacion->setMontoPagado((float)$montoPagado);
+        $certificacion->setMontoPagadoNacion((float)$montoPagadoNacion);
+        $certificacion->setMontoPagadoProvincia((float)$montoPagadoProvincia);
         $certificacion->setUbicacion($ubicacion);
         $certificacion->setNumeroSidif($numeroSidif);
         $certificacion->setFechaInicioPago($fechaInicioPago);

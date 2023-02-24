@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Backoffice\User\Application\Put;
 
-use App\Backoffice\Role\Application\Get\RoleFinder;
-use App\Backoffice\Role\Domain\RoleRepository;
+use App\Backoffice\Role\Application\Get\EmpresaFinder;
+use App\Backoffice\Role\Domain\EmpresaRepository;
 use App\Backoffice\User\Application\Get\Single\UserFinder;
 use App\Backoffice\User\Domain\UserEmailIsAvailableSpecification;
 use App\Backoffice\User\Domain\UserNameIsAvailableSpecification;

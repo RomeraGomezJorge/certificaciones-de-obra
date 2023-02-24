@@ -32,10 +32,6 @@ class ObraPostController extends WebController
         }
 
         $validationErrors = $this->validationRules->verify($request);
-//
-//        var_dump(json_encode($validationErrors));
-//        var_dump(json_encode($validationErrors);
-//        die();
 
         return $validationErrors->count() !== 0
             ? $this->redirectWithErrors(TwigTemplateConstants::CREATE_PATH, $validationErrors, $request)
@@ -55,7 +51,8 @@ class ObraPostController extends WebController
             $request->get('presupuestoDisponibleRegularizado'),
             $request->get('estadoPresupuestario'),
             $request->get('estadoObra'),
-            $request->get('estadoTramite')
+            $request->get('estadoTramite'),
+            $request->get('empresaId')
         );
 
         return $this->redirectWithMessage(

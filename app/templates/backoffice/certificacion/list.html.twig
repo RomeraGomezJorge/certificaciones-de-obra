@@ -91,7 +91,10 @@
                 </td>
                 <td class="d-none d-sm-table-cell">{{ certificacion.expedienteCertificado }}</td>
                 <td class="d-none d-sm-table-cell">{{ certificacion.porcentajeAvanceObra }}</td>
-                <td class="d-none d-sm-table-cell">{{ certificacion.montoPagado }}</td>
+                <td class="d-none d-sm-table-cell">
+                    <b>{{ certificacion.FuenteFinancieraCertificado }}: </b>
+                   {{ certificacion.montoPagadoNacion +  certificacion.montoPagadoProvincia }}
+                </td>
                 <td class="d-none d-sm-table-cell">{{ certificacion.ubicacionDespription }}</td>
                 <td class="d-none d-sm-table-cell">
                     <div class="d-block d-sm-none">
@@ -140,7 +143,8 @@
 {% block filterFields %}
     <div class="form-group col-12 col-sm-4">
         <select name="filters[0][field]" id="field" class="form-control form-control-sm w-100">
-            <option value="obra" selected>{{ 'Name'|trans }}</option>
+            <option value="expedienteCertificado" selected>Expediente</option>
+            <option value="expedienteCertificado" selected>Expediente</option>
         </select>
     </div>
     <div class="form-group col-12 col-sm-4">

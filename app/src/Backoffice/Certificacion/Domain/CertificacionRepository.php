@@ -14,6 +14,8 @@ interface CertificacionRepository
 
     public function search(Uuid $id): ?Certificacion;
 
+    public function searchByObra(string $id);
+
     public function searchAll(): array;
 
     public function matching(Criteria $criteria, ?Obra $obra): array;
