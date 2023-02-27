@@ -44,3 +44,13 @@
     usuario : user
     pass    : User1234
 
+# Correr Migraciones
+1 ) Ingresar al contenedor de PHP ejecutando lo siguiente
+
+    docker exec -ti php-fpm /bin/bash
+
+2 ) Una vez dentro del contenedor ejecutar los siguiente para correr las migraciones
+
+    php bin/console doctrine:migrations:migrate
+
+
