@@ -20,8 +20,9 @@ final class Version20230224110136 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-//        $this->addSql('CREATE TABLE empresa (id VARCHAR(36) NOT NULL, nombre VARCHAR(100) NOT NULL, UNIQUE INDEX id (id), UNIQUE INDEX nombre (nombre), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-//        $this->addSql('DROP TABLE role');
+        $this->addSql('CREATE TABLE empresa (id VARCHAR(36) NOT NULL, nombre VARCHAR(100) NOT NULL, UNIQUE INDEX id (id), UNIQUE INDEX nombre (nombre), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE database.user DROP FOREIGN KEY FK_8D93D649D60322AC');
+        $this->addSql('DROP TABLE role');
         $this->addSql('ALTER TABLE obra ADD empresa_id VARCHAR(36) DEFAULT NULL');
         $this->addSql('ALTER TABLE obra ADD CONSTRAINT FK_2EEE6DBD521E1991 FOREIGN KEY (empresa_id) REFERENCES empresa (id)');
         $this->addSql('CREATE INDEX IDX_2EEE6DBD521E1991 ON obra (empresa_id)');

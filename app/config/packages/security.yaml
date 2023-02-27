@@ -17,13 +17,13 @@ security:
           - App\Backoffice\Authentication\Login\LoginFormAuthenticator
       logout:
         path: logout
-        target: /login
+        target: /
         # where to redirect after logout
         # target: app_any_route
       remember_me:
         secret:   '%kernel.secret%'
         lifetime: 604800 # 1 week in seconds
-        path:     /login
+        path:     /
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#firewalls-authentication
